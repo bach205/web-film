@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { postMethod } from "../library/API.js"
 function Login() {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -10,17 +10,8 @@ function Login() {
     }
 
     const handleOnClickLogin = async () => {
-        let result = await fetch("http://localhost:8080/SpringBootTest/api/student", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset= utf-8",
-            },
-            body: JSON.stringify({
-                id: userName,
-                name: password
-            })
-        });
-        result = await result.json();
+        let result = await postMethod({ id: userName, name: password }, "http://localhost:8080/SpringBootTest/api/student");
+        console.log(result)
         setResponse(result);
     }
     return (

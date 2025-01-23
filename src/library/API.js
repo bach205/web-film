@@ -4,8 +4,10 @@ const postMethod = async (data, url) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset= utf-8",
+
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            credentials: "include"
         });
         result = await result.json()
 

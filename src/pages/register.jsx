@@ -7,6 +7,7 @@ import Button from "../components/form/button.jsx";
 import { useNavigate } from "react-router";
 import { loginContext } from "../context/loginProvider.jsx";
 import "../css/form/input.css"
+import { isValidEmail } from "../library/validate.js";
 
 function Register() {
     const { isLogin, setIsLogin } = useContext(loginContext);
@@ -44,6 +45,8 @@ function Register() {
         if (!email || !firstName || !lastName || !password || !gender || !address) {
             setResponse("*You must enter all field");
             return;
+        } else if (!isValidEmail(email)) {
+            setResponse("*your email format is wrong please try again")
         }
         else {
             let result = await postMethod(data, "http://localhost:8080/Web-film/user/registration");

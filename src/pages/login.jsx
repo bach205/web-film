@@ -6,6 +6,7 @@ import Input from "../components/form/input.jsx";
 import Button from "../components/form/button.jsx";
 import { useNavigate } from "react-router";
 import { loginContext } from "../context/loginProvider.jsx";
+import { isValidEmail } from "../library/validate.js";
 
 function Login() {
     const { isLogin, setIsLogin } = useContext(loginContext);
@@ -29,6 +30,8 @@ function Login() {
         if (!email) {
             setResponse("*Email field must not be a blank");
             return;
+        } else if (!isValidEmail(email)) {
+            setResponse("*your email format is wrong please try again")
         } else if (!password) {
             setResponse("*Password field must not be a blank");
             return;

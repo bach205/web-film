@@ -3,6 +3,7 @@ import Container from "../components/container"
 import Home from "../pages/home"
 import Login from "../pages/Login"
 import Register from "../pages/register"
+import ForgetPassword from "../pages/forgetPassword"
 
 function AppRouter() {
 
@@ -14,6 +15,7 @@ function AppRouter() {
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="forgetpassword" element={<ForgetPassword />} />
             {/* Fallback Route */}
             <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>

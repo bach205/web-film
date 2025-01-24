@@ -1,2 +1,5 @@
 import Home from "./home";
-export default { Home }
+import Login from "./Login";
+import Register from "./register";
+import ForgetPassword from "./forgetPassword";
+export default { Home, ForgetPassword, Login, Register }

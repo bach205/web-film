@@ -50,8 +50,8 @@ function Login() {
             }
         }
     }
-    const handleOnClickSignUp = () => {
-        navigate("/register");
+    const handleOnClickNavigate = (url) => {
+        navigate(url);
     }
     return (
         <div className="container">
@@ -59,8 +59,8 @@ function Login() {
             <form>
                 <WrapperBox>
                     <h2>Login</h2>
-                    <Input type="text" placeholder="Enter your email" onChange={event => handleOnChange(event, setemail)} />
-                    <Input type="password" placeholder="Enter your password" onChange={event => handleOnChange(event, setPassword)} />
+                    <Input type="text" placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setemail)} />
+                    <Input type="password" placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} />
                     {response != null &&
                         <p style={{ margin: 0, textAlign: "left", color: "red" }}>{response}</p>
                     }
@@ -69,11 +69,11 @@ function Login() {
                             <input type="checkbox" />
                             <label>Remember password</label>
                         </span>
-                        <a href="#">Forget password?</a>
+                        <a style={{ cursor: "pointer" }} onClick={() => handleOnClickNavigate("/forgetpassword")}>Forget password?</a>
                     </div>
                     <Button type="default-button" onClick={handleOnClickLogin}>Login</Button>
                     <p style={{ margin: "0" }}>OR</p>
-                    <Button type="neural-button" onClick={handleOnClickSignUp}>Sign up</Button>
+                    <Button type="neural-button" onClick={() => handleOnClickNavigate("/register")}>Sign up</Button>
                 </WrapperBox>
             </form>
             <p>designed by huybach. Contact: huybach290125@gmail.com</p>

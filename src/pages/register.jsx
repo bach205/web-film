@@ -71,14 +71,14 @@ function Register() {
                     <h2>Register account</h2>
                     <div style={{ display: "flex", gap: "15px", flexDirection: "row" }}>
                         {/* first name */}
-                        <Input className="default-input-half" type="text" placeholder="First name" onChange={event => handleOnChange(event, setFirstName)} />
+                        <Input className="default-input-half" label="First Name" type="text" placeholder="First name" onChange={event => handleOnChange(event, setFirstName)} />
                         {/* last name */}
-                        <Input className="default-input-half" type="text" placeholder="Last name" onChange={event => handleOnChange(event, setLastName)} />
+                        <Input className="default-input-half" label="Last Name" type="text" placeholder="Last name" onChange={event => handleOnChange(event, setLastName)} />
                     </div>
                     {/* email */}
-                    <Input type="text" placeholder="Enter your email" onChange={event => handleOnChange(event, setemail)} />
+                    <Input type="text" placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setemail)} />
                     {/* password */}
-                    <Input type="password" placeholder="Enter your password" onChange={event => handleOnChange(event, setPassword)} />
+                    <Input type="password" placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} />
                     {/* gender */}
                     <select className="default-input" style={{ width: "200px", alignSelf: "center" }} onChange={event => handleOnChange(event, setGender)}>
                         <option value={""} style={{ color: "gray" }}>Gender</option>
@@ -87,11 +87,10 @@ function Register() {
                         <option value={2}>Unknown</option>
                     </select>
                     {/* address */}
-                    <Input type="text" placeholder="Your address" onChange={event => handleOnChange(event, setAddress)} />
+                    <Input type="text" placeholder="Your address" label="Address" onChange={event => handleOnChange(event, setAddress)} />
                     {response != null &&
                         <p style={{ margin: 0, textAlign: "left", color: "red" }}>{response}</p>
                     }
-
                     <Button type="default-button" onClick={handleOnClickRegister}>Register</Button>
                     <p style={{ margin: "0" }}>OR</p>
                     <Button type="neural-button" onClick={handleOnClickLogin}>Login</Button>

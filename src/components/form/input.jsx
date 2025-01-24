@@ -1,9 +1,9 @@
 import "../../css/form/input.css"
 
-function Input({ type, placeholder, onChange }) {
+function Input({ type, placeholder, onChange, className = "default-input", }) {
 
     return (
-        <input className="default-input" type={type} placeholder={placeholder} onChange={onChange} />
+        <input className={className} type={type} placeholder={placeholder} onChange={onChange} />
     )
 }
 

@@ -1,9 +1,9 @@
 import "../../css/form/button.css"
 
-function Button({ type, onClick, children }) {
+function Button({ type, onClick, children, }) {
 
     return (
-        <button className="default-button" type={type} onClick={onClick} >{children}</button>
+        <button className={type} type="button" onClick={onClick} >{children}</button>
     )
 }
 

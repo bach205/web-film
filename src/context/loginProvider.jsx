@@ -8,7 +8,6 @@ const LoginProvider = ({ children }) => {
 
     //khi navigate cay xe bi reload nen can phai luu gia tri isLogin vao cuc bo
     useEffect(() => {
-        console.log(1)
         const fetchData = async () => {
             let result = await postMethod({}, "http://localhost:8080/Web-film/authentication");
             if (result.status == 200) {

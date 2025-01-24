@@ -4,3 +4,10 @@
     border-radius: 10px;
     padding: 2px 10px;
 }
+
+.default-input-half {
+    width: 157px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 2px 10px;
+}

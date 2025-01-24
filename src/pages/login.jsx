@@ -10,9 +10,8 @@ import { loginContext } from "../context/loginProvider.jsx";
 function Login() {
     const { isLogin, setIsLogin } = useContext(loginContext);
     useEffect(() => {
-        console.log("page login" + isLogin);
         if (isLogin) {
-            window.location.href = "http://localhost:5173/"
+            navigate("/")
         }
 
     }, [isLogin])
@@ -48,6 +47,9 @@ function Login() {
             }
         }
     }
+    const handleOnClickSignUp = () => {
+        navigate("/register");
+    }
     return (
         <div className="container">
             <h1>WELCOME TO WEB FILM DEMO</h1>
@@ -66,7 +68,9 @@ function Login() {
                         </span>
                         <a href="#">Forget password?</a>
                     </div>
-                    <Button type="button" onClick={handleOnClickLogin}>Login</Button>
+                    <Button type="default-button" onClick={handleOnClickLogin}>Login</Button>
+                    <p style={{ margin: "0" }}>OR</p>
+                    <Button type="neural-button" onClick={handleOnClickSignUp}>Sign up</Button>
                 </WrapperBox>
             </form>
             <p>designed by huybach. Contact: huybach290125@gmail.com</p>

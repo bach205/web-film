@@ -6,6 +6,7 @@
     padding-right: 50px;
     display: inline-block;
     box-shadow: rgb(140, 140, 140) 5px 5px 10px;
+    border-radius: 20px;
 }
 
 .wrapper-box {

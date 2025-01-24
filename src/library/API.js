@@ -9,7 +9,6 @@ const postMethod = async (data, url) => {
             body: JSON.stringify(data),
             credentials: "include"
         });
-
         return result;
     } catch (e) {
         return { status: 500, message: e };

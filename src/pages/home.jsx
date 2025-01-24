@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '../../public/vite.svg'
 import "../css/home.css"
+import { loginContext } from '../context/loginProvider'
 
 function Home() {
     const [count, setCount] = useState(0)
+    const { isLogin, setIsLogin } = useContext(loginContext);
+    useEffect(() => {
+        console.log(isLogin);
+    }, [isLogin])
 
     return (
         <>

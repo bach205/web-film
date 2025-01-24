@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { postMethod } from "../library/API.js"
 import "../css/login.css"
 import WrapperBox from "../components/wrapperBox.jsx";
 import Input from "../components/form/input.jsx";
 import Button from "../components/form/button.jsx";
 import { useNavigate } from "react-router";
+import { loginContext } from "../context/loginProvider.jsx";
 
 function Login() {
-
+    const { isLogin, setIsLogin } = useContext(loginContext);
     useEffect(() => {
-        const fetchData = async () => {
-            let result = await postMethod({}, "http://localhost:8080/Web-film/session");
-            if (result.status == 200) {
-                window.location.href = "http://localhost:5173/"
-            }
+        console.log("page login" + isLogin);
+        if (isLogin) {
+            window.location.href = "http://localhost:5173/"
         }
-        fetchData();
-    }, [])
+
+    }, [isLogin])
     const navigate = useNavigate();
     const [email, setemail] = useState("");
     const [password, setPassword] = useState("");
@@ -30,15 +29,21 @@ function Login() {
         event.preventDefault();
         if (!email) {
             setResponse("*Email field must not be a blank");
+            return;
         } else if (!password) {
             setResponse("*Password field must not be a blank");
+            return;
         }
         else {
-            let result = await postMethod({ email: email, password: password }, "http://localhost:8080/Web-film/login");
+            let result = await postMethod({ email: email, password: password }, "http://localhost:8080/Web-film/user/validate");
             if (result.status == 200) {
                 setResponse("");
+                setIsLogin(true);
                 navigate("/");
-            } else {
+            } else if (result.status == 500) {
+                setResponse("*cannot fetch api error");
+            }
+            else {
                 setResponse("*your email or your password is incorrect");
             }
         }

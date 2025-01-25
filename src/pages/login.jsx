@@ -9,17 +9,35 @@ import { loginContext } from "../context/loginProvider.jsx";
 import { isValidEmail } from "../library/validate.js";
 
 function Login() {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isRemember, setIsRemember] = useState(false);
+
+    const [response, setResponse] = useState("");
     const { isLogin, setIsLogin } = useContext(loginContext);
     useEffect(() => {
+        let localPass = localStorage.getItem("password");
+        let localEmail = localStorage.getItem("email");
+        let localRememberPassword = localStorage.getItem("rememberPassword");
+
+        if (localPass) {
+            setPassword(localPass)
+        }
+
+        if (localEmail) {
+            setEmail(localEmail)
+        }
+
+        if (localRememberPassword) {
+            setIsRemember(localRememberPassword)
+        }
+
         if (isLogin) {
             navigate("/")
         }
 
     }, [isLogin])
-    const navigate = useNavigate();
-    const [email, setemail] = useState("");
-    const [password, setPassword] = useState("");
-    const [response, setResponse] = useState("");
 
     const handleOnChange = (event, setState) => {
         setState(event.target.value);
@@ -48,6 +66,15 @@ function Login() {
             else {
                 setResponse("*your email or your password is incorrect");
             }
+            if (isRemember) {
+                localStorage.setItem("rememberPassword", true);
+                localStorage.setItem("email", email);
+                localStorage.setItem("password", password);
+            } else {
+                localStorage.removeItem("removePassword");
+                localStorage.removeItem("email");
+                localStorage.removeItem("password");
+            }
         }
     }
     const handleOnClickNavigate = (url) => {
@@ -59,14 +86,16 @@ function Login() {
             <form>
                 <WrapperBox>
                     <h2>Login</h2>
-                    <Input type="text" placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setemail)} />
-                    <Input type="password" placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} />
+                    <Input type="text" value={email} placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setEmail)} />
+                    <Input type="password" value={password} placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} />
                     {response != null &&
                         <p style={{ margin: 0, textAlign: "left", color: "red" }}>{response}</p>
                     }
                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                         <span>
-                            <input type="checkbox" />
+                            <input type="checkbox" checked={isRemember} onChange={() => {
+                                setIsRemember(!isRemember)
+                            }} />
                             <label>Remember password</label>
                         </span>
                         <a style={{ cursor: "pointer" }} onClick={() => handleOnClickNavigate("/forgetpassword")}>Forget password?</a>

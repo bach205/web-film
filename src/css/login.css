@@ -16,6 +16,7 @@
     width: 100%;
     height: 100%;
     background-image: url(../assets/LoginPage/loginBackground.jpg);
+    background-repeat: repeat;
     /* Lấy nền từ .container */
     filter: blur(5px);
     /* Làm mờ nền */

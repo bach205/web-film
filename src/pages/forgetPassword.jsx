@@ -70,7 +70,6 @@ function ForgetPassword() {
     }
     return (
         <div className="container">
-            <h1>WELCOME TO WEB FILM DEMO</h1>
             <form>
                 <WrapperBox>
                     <div style={{ display: "flex", flexDirection: "column", gap: "15px", alignItems: "center" }}>
@@ -88,7 +87,6 @@ function ForgetPassword() {
                     </div>
                 </WrapperBox>
             </form>
-            <p>designed by huybach. Contact: huybach290125@gmail.com</p>
         </div>
     )
 }

@@ -30,7 +30,7 @@ function Login() {
         }
 
         if (localRememberPassword) {
-            setIsRemember(localRememberPassword)
+            setIsRemember(true)
         }
 
         if (isLogin) {

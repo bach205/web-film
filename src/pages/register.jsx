@@ -66,9 +66,9 @@ function Register() {
     }
     return (
         <div className="container">
-            <form>
-                <WrapperBox>
-                    <h2>Register account</h2>
+            <WrapperBox>
+                <form style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "15px" }}>
+                    <h2 style={{ textAlign: "center" }}>Register account</h2>
                     <div style={{ display: "flex", gap: "15px", flexDirection: "row" }}>
                         {/* first name */}
                         <Input className="default-input-half" label="First Name" type="text" placeholder="First name" onChange={event => handleOnChange(event, setFirstName)} />
@@ -92,10 +92,11 @@ function Register() {
                         <p style={{ margin: 0, textAlign: "left", color: "red" }}>{response}</p>
                     }
                     <Button type="default-button" onClick={handleOnClickRegister}>Register</Button>
-                    <p style={{ margin: "0" }}>OR</p>
+                    <p style={{ margin: "0", textAlign: "center" }}>OR</p>
                     <Button type="neural-button" onClick={handleOnClickLogin}>Login</Button>
-                </WrapperBox>
-            </form>
+                </form>
+            </WrapperBox>
+
         </div >
     )
 }

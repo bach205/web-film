@@ -83,28 +83,30 @@ function Login() {
     return (
         <div className="container">
             <h1>WELCOME TO WEB FILM DEMO</h1>
-            <form>
-                <WrapperBox>
-                    <h2>Login</h2>
+
+            <WrapperBox>
+                <form style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "15px" }}>
+                    <h2 style={{ textAlign: "center" }}>Login</h2>
                     <Input type="text" value={email} placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setEmail)} />
                     <Input type="password" value={password} placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} />
                     {response != null &&
                         <p style={{ margin: 0, textAlign: "left", color: "red" }}>{response}</p>
                     }
-                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                        <span>
+                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
+                        <div>
                             <input type="checkbox" checked={isRemember} onChange={() => {
                                 setIsRemember(!isRemember)
                             }} />
                             <label>Remember password</label>
-                        </span>
+                        </div>
                         <a style={{ cursor: "pointer" }} onClick={() => handleOnClickNavigate("/forgetpassword")}>Forget password?</a>
                     </div>
                     <Button type="default-button" onClick={handleOnClickLogin}>Login</Button>
-                    <p style={{ margin: "0" }}>OR</p>
+                    <p style={{ margin: "0", textAlign: "center" }}>OR</p>
                     <Button type="neural-button" onClick={() => handleOnClickNavigate("/register")}>Sign up</Button>
-                </WrapperBox>
-            </form>
+                </form>
+            </WrapperBox>
+
             <p>designed by huybach. Contact: huybach290125@gmail.com</p>
         </div>
     )

@@ -40,6 +40,11 @@ h2 {
   font-size: 2em;
 }
 
+
+i {
+  margin: 0 5px;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

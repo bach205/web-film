@@ -13,7 +13,6 @@ function Header() {
     const { userData, setUserData } = useContext(loginContext);
 
     const [isOpenUserList, setIsOpenUserList] = useState(false);
-    const userList = useRef(null);
 
     const onclick = (url) => {
         navigate(url);
@@ -24,18 +23,24 @@ function Header() {
         setIsLogin(false);
         onclick("/");
     }
+
+    const onEnterDown = (e) => {
+        if (e.key == "Enter") alert("dang phat trien")
+    }
+
     return (
         <div className="header-container">
-            <ul className="header-navbar">
-                <li><img src={logoNoBackground} alt="" width="100px" height="100%"></img></li>
-                <li>Trang chủ</li>
-                <li>Phim bộ</li>
-                <li>Phim lẻ</li>
-                <li>Anime</li>
+            <ul className="header-navbar " id="header-ul">
+                <li><img src={logoNoBackground} alt="" width="80px" height="100%"></img></li>
+                <li><i className="fa-solid fa-house"></i>Trang chủ</li>
+                <li><i className="fa-solid fa-video"></i>Phim bộ</li>
+                <li><i className="fa-solid fa-film"></i>Phim lẻ</li>
+                <li><i className="fa-solid fa-dragon"></i>Anime</li>
             </ul>
 
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                <Input type={"text"} placeholder={"tim kiem"} />
+                <span id="find-icon"><i className="fa-solid fa-magnifying-glass"></i></span>
+                <Input type={"text"} placeholder={"Tìm kiếm"} className="medium-input" onKeyDown={onEnterDown} />
             </div>
 
             <div>

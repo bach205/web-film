@@ -1,49 +1,38 @@
 import { useContext, useEffect, useState } from 'react'
 import { loginContext } from '../context/loginProvider'
 import "../css/home.css"
-import Button from '../components/form/button';
 import "../css/home.css"
-import VideoBox from '../components/videoBox';
-import bachnguyetphantinh from "../assets/movie/bachnguyetphantinh.webp"
+import { postMethod } from '../library/API';
+import ContentContainerSlider from '../components/contentContainerSlider';
+import ContentBanner from '../components/contentBanner';
 
 function Home() {
     const { isLogin, setIsLogin } = useContext(loginContext);
     const { userData, setUserData } = useContext(loginContext);
+    const [trending, setTrending] = useState("");
+    const [latestBo, setLatestBo] = useState("");
+    const [latestLe, setLatestLe] = useState("");
 
     useEffect(() => {
-        console.log(userData)
-    }, [isLogin])
+        const fetchData = async () => {
+            let result = await postMethod({}, "http://localhost:8080/Web-film/api/movies/load-trending-latest")
+            result = await result.json();
+            setTrending(result.listData[0]);
+            setLatestBo(result.listData[0]);
+            setLatestLe(result.listData[0]);
+        }
+        fetchData()
+    }, [])
 
     return (
-        <>
-            <div className='video-container'>
-                <video src='https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4' autoPlay muted loop>
-                </video>
-                <div className='list-container'>
-                    <h1 style={{ marginTop: "0", marginBottom: "20px" }}>Ten film</h1>
-                    <p>day la bo phim gi do alo alo 12 3 4 4 test okay okay halo halo</p>
-                    <div className='button-list'>
-                        <Button type='watch-now-button' >
-                            xem ngay
-                        </Button>
-                        <Button type='watch-later-button' >
-                            xem sau
-                        </Button>
-                    </div>
-                </div>
-            </div>
+        <div >
+            <ContentBanner src={'https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4'} title={"Ngoai gia hoi xuan"} description={trending && trending[0]?.description} />
             <div className='content-container'>
-                <h2>Thịnh Hành</h2>
-                <div className='content-container-slider'>
-                    <VideoBox url={bachnguyetphantinh} />
-                    <VideoBox url={bachnguyetphantinh} />
-                    <VideoBox url={bachnguyetphantinh} />
-                    <VideoBox url={bachnguyetphantinh} />
-                    <VideoBox url={bachnguyetphantinh} />
-                    <VideoBox url={bachnguyetphantinh} />
-                </div>
+                <ContentContainerSlider label={"Thịnh Hành"} array={trending} />
+                <ContentContainerSlider label={"Phim bộ"} array={latestBo} />
+                <ContentContainerSlider label={"Phim lẻ"} array={latestLe} />
             </div>
-        </>
+        </div>
     )
 }
 

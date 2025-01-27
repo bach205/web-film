@@ -20,7 +20,7 @@ function Register() {
     }, [isLogin])
     const navigate = useNavigate();
 
-    const [email, setemail] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -78,7 +78,7 @@ function Register() {
                         <Input className="default-input-half" label="Last Name" type="text" placeholder="Last name" onChange={event => handleOnChange(event, setLastName)} />
                     </div>
                     {/* email */}
-                    <Input type="text" placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setemail)} />
+                    <Input type="text" placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setEmail)} />
                     {/* password */}
                     <Input type="password" placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} />
                     {/* gender */}
@@ -90,7 +90,7 @@ function Register() {
                     </select>
                     {/* address */}
                     <Input type="text" placeholder="Your address" label="Address" onChange={event => handleOnChange(event, setAddress)} />
-                    {response != null &&
+                    {response &&
                         <p style={{ margin: 0, textAlign: "left", color: "red" }}>{response}</p>
                     }
                     <Button type="default-button" onClick={handleOnClickRegister}>Register</Button>

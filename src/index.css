@@ -67,6 +67,10 @@ ul {
   padding: 0;
 }
 
+.margin-header {
+  margin-top: 60px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

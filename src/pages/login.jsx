@@ -92,7 +92,7 @@ function Login() {
                     <h2 style={{ textAlign: "center" }}>Login</h2>
                     <Input type="text" value={email} placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setEmail)} />
                     <Input type="password" value={password} placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} />
-                    {response != null &&
+                    {response &&
                         <p style={{ margin: 0, textAlign: "left", color: "red" }}>{response}</p>
                     }
                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }}>

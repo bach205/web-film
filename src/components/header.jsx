@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router"
 import { loginContext } from "../context/loginProvider";
 import { postMethod } from "../library/API";
@@ -14,14 +14,14 @@ function Header() {
 
     const [isOpenUserList, setIsOpenUserList] = useState(false);
 
-    const onclick = (url) => {
+    const handleNavigate = (url) => {
         navigate(url);
     }
 
     const handleLogout = async () => {
         await postMethod({}, "http://localhost:8080/Web-film/authentication/reset-session-cookie");
         setIsLogin(false);
-        onclick("/");
+        handleNavigate("/");
     }
 
     const onEnterDown = (e) => {
@@ -31,8 +31,8 @@ function Header() {
     return (
         <div className="header-container">
             <ul className="header-navbar " id="header-ul">
-                <li><img src={logoNoBackground} alt="" width="80px" height="100%"></img></li>
-                <li><i className="fa-solid fa-house"></i>Trang chủ</li>
+                <li onClick={() => { handleNavigate("/") }}><img src={logoNoBackground} alt="" width="80px" height="100%"></img></li>
+                <li onClick={() => { handleNavigate("/") }}><i className="fa-solid fa-house"></i>Trang chủ</li>
                 <li><i className="fa-solid fa-video"></i>Phim bộ</li>
                 <li><i className="fa-solid fa-film"></i>Phim lẻ</li>
                 <li><i className="fa-solid fa-dragon"></i>Anime</li>
@@ -47,28 +47,28 @@ function Header() {
                 {!isLogin
                     ?
                     (<div className="header-right-content">
-                        <Button type="small-button" onClick={() => onclick("/login")}>Login</Button>
-                        <Button type="small-button" onClick={() => onclick("/register")}>Register</Button>
+                        <Button type="small-button" onClick={() => handleNavigate("/login")}>Login</Button>
+                        <Button type="small-button" onClick={() => handleNavigate("/register")}>Register</Button>
                     </div>)
                     :
                     (<div className="header-right-content">
                         <p>{"Hello " + userData?.firstName}</p>
                         <div style={{ display: "flex", flexDirection: "column" }}>
-                            <button className="circle" onBlur={() => {
-                                setIsOpenUserList(false);
-                            }} onClick={() => {
+                            <button className="circle" onClick={() => {
                                 setIsOpenUserList(!isOpenUserList);
                             }}></button>
                             {isOpenUserList &&
                                 <ul className="user-list">
-                                    <li>Hồ sơ cá nhân</li>
+                                    <li onClick={() => { handleNavigate("management/user") }}>Hồ sơ cá nhân</li>
+                                    {userData?.role === 1 && <li>Admin management (CRUD)</li>}
                                     <div style={{ border: "solid 1px black" }}></div>
                                     <li>Xem sau (giỏ hàng)</li>
                                     <li>Lịch sử xem</li>
                                     <li>Đang phát triển...</li>
+                                    <div style={{ border: "solid 1px black" }}></div>
+                                    <li onClick={handleLogout}>Đăng xuất</li>
                                 </ul>}
                         </div>
-                        <Button type="small-button" onClick={handleLogout}>Logout</Button>
                     </div>)
                 }
 

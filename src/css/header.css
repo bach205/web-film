@@ -55,8 +55,8 @@
 
 .user-list {
     position: absolute;
-    top: 73.5px;
-    left: 1182px;
+    top: 100%;
+    right: 1%;
     background-color: gray;
     border: solid 1px black;
     border-radius: 10px;
@@ -68,13 +68,14 @@
     justify-content: flex-start;
     align-items: center;
     height: 20px;
-    width: 180px;
+    width: 200px;
     font-size: 15px;
 }
 
 .user-list>li:hover {
     background-color: rgba(185, 185, 185);
     color: black;
+    cursor: pointer;
 }
 
 #find-icon {

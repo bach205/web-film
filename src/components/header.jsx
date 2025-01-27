@@ -10,7 +10,7 @@ import Input from "./form/input";
 function Header() {
     const navigate = useNavigate();
     const { isLogin, setIsLogin } = useContext(loginContext);
-    const { userData, setUserData } = useContext(loginContext);
+    const { userData } = useContext(loginContext);
 
     const [isOpenUserList, setIsOpenUserList] = useState(false);
 
@@ -52,7 +52,7 @@ function Header() {
                     </div>)
                     :
                     (<div className="header-right-content">
-                        <p>{"Hello " + userData.firstName}</p>
+                        <p>{"Hello " + userData?.firstName}</p>
                         <div style={{ display: "flex", flexDirection: "column" }}>
                             <button className="circle" onBlur={() => {
                                 setIsOpenUserList(false);

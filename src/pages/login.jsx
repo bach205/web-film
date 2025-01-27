@@ -15,7 +15,7 @@ function Login() {
     const [isRemember, setIsRemember] = useState(false);
 
     const [response, setResponse] = useState("");
-    const { isLogin, setIsLogin } = useContext(loginContext);
+    const { isLogin, setIsLogin, setUserData } = useContext(loginContext);
     useEffect(() => {
         let localPass = localStorage.getItem("password");
         let localEmail = localStorage.getItem("email");
@@ -56,9 +56,12 @@ function Login() {
         }
         else {
             let result = await postMethod({ email: email, password: password }, "http://localhost:8080/Web-film/user/validate");
+            result = await result.json();
             if (result.status == 200) {
                 setResponse("");
                 setIsLogin(true);
+                console.log(result.data)
+                setUserData(result?.data)
                 navigate("/");
             } else if (result.status == 500) {
                 setResponse("*cannot fetch api error");

@@ -11,6 +11,7 @@ import { isValidEmail } from "../library/validate.js";
 
 function Register() {
     const { isLogin, setIsLogin } = useContext(loginContext);
+    const { setUserData } = useContext(loginContext);
     useEffect(() => {
         if (isLogin) {
             navigate("/")
@@ -54,6 +55,7 @@ function Register() {
             if (result.status == 200) {
                 setResponse(result.message)
                 setIsLogin(true);
+                setUserData(result?.data)
                 navigate("/");
             }
             else {

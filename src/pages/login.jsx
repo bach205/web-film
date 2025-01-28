@@ -60,7 +60,6 @@ function Login() {
             if (result.status == 200) {
                 setResponse("");
                 setIsLogin(true);
-                console.log(result.data)
                 setUserData(result?.data)
                 navigate("/");
             }

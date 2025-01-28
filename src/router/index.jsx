@@ -6,6 +6,7 @@ import Register from "../pages/register"
 import ForgetPassword from "../pages/forgetPassword"
 import UserManagement from "../pages/userManagement"
 import { PrivateRoute } from "./privateRoute"
+import { PrivateAdminRoute } from "./privateAdminRoute"
 import { AdminManagement } from "../pages/adminManagement"
 
 function AppRouter() {
@@ -17,7 +18,7 @@ function AppRouter() {
                 <Route index element={<Home />} />
                 <Route path="management">
                     <Route path="user" element={<PrivateRoute element={<UserManagement />} />} />
-                    <Route path="admin" element={<PrivateRoute element={<AdminManagement />} />} />
+                    <Route path="admin" element={<PrivateAdminRoute element={<AdminManagement />} />} />
                 </Route>
             </Route>
             <Route path="login" element={<Login />} />

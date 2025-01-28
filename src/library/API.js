@@ -11,7 +11,7 @@ const postMethod = async (data, url) => {
         });
         return result;
     } catch (e) {
-        return { status: 500, message: e };
+        return JSON.stringify({ status: 500, message: e });
     }
 }
 export { postMethod } 

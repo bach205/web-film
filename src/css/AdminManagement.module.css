@@ -1,0 +1,77 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+tr:nth-child(odd) {
+    color: white;
+    background-color: rgb(129, 127, 127);
+}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+}
+
+.actionContainer {
+    text-align: center;
+    width: 8em;
+}
+
+.addButton {
+    text-align: center;
+    height: 1.5em;
+    width: 2em;
+    border-radius: 0.2em;
+    background-color: black;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+tr:hover {
+    background-color: rgb(88, 149, 149);
+}
+
+.action {
+    text-align: center;
+    margin: 0.5em 0.5em;
+    color: white;
+}
+
+.update {
+    background-color: #04AA6D;
+    font-size: 0.9em;
+    padding: 0.1em 0.6em;
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+.delete {
+    background-color: rgb(163, 34, 34);
+    font-size: 0.9em;
+    padding: 0.1em 0.6em;
+    width: 3.5em;
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+.abort {
+    color: black;
+    background-color: white;
+    font-size: 0.9em;
+    padding: 0.1em 0.6em;
+    width: 3.5em;
+    border-radius: 1em;
+    cursor: pointer;
+}

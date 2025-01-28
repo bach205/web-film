@@ -63,11 +63,9 @@ function Login() {
                 console.log(result.data)
                 setUserData(result?.data)
                 navigate("/");
-            } else if (result.status == 500) {
-                setResponse("*cannot fetch api error");
             }
             else {
-                setResponse("*your email or your password is incorrect");
+                setResponse(result.message);
             }
             if (isRemember) {
                 localStorage.setItem("rememberPassword", true);

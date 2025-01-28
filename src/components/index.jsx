@@ -7,4 +7,5 @@ import Button from "./form/button";
 import VideoBox from "./videoBox";
 import ContentContainerSlider from "./contentContainerSlider";
 import ContentBanner from "./contentBanner";
-export default { Header, Footer, Container, WrapperBox, Input, Button, VideoBox, ContentContainerSlider, ContentBanner }
+import { DropDown } from "./form/dropdown";
+export default { Header, Footer, Container, WrapperBox, Input, Button, VideoBox, ContentContainerSlider, ContentBanner, DropDown }

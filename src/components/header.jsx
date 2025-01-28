@@ -60,7 +60,7 @@ function Header() {
                             {isOpenUserList &&
                                 <ul className="user-list">
                                     <li onClick={() => { handleNavigate("management/user") }}>Hồ sơ cá nhân</li>
-                                    {userData?.role === 1 && <li>Admin management (CRUD)</li>}
+                                    {userData?.role === 1 && <li onClick={() => { handleNavigate("management/admin") }}>Admin management (CRUD)</li>}
                                     <div style={{ border: "solid 1px black" }}></div>
                                     <li>Xem sau (giỏ hàng)</li>
                                     <li>Lịch sử xem</li>

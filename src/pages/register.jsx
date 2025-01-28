@@ -33,8 +33,7 @@ function Register() {
         setState(event.target.value);
     }
 
-    const handleOnClickRegister = async (event) => {
-        event.preventDefault();
+    const handleOnClickRegister = async () => {
         const data = {
             firstName,
             lastName,

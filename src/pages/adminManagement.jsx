@@ -41,6 +41,7 @@ export const AdminManagement = () => {
         <div className="margin-header">
             <h2>User management</h2>
             <UserTable />
+            <div style={{ height: "10em" }}></div>
         </div>
     )
 }
@@ -101,7 +102,7 @@ const UserTable = () => {
                     <th >Gender</th>
                     <th>Address</th>
                     <th >Role</th>
-                    <th className={styles.actionContainer}>Action</th>
+                    <th className={styles.actionContainer} >Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -113,7 +114,7 @@ const UserTable = () => {
                     <td><DropDownCRUD array={arrayGender} value={isCreate == true ? gender : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setGender) }} /></td>
                     <td><InputCRUD value={isCreate == true ? address : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setAddress) }} /></td>
                     <td><DropDownCRUD array={arrayRole} value={isCreate == true ? role : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setRole) }} /></td>
-                    <td className={styles.action}>
+                    <td className={styles.action} >
                         {isCreate && <span className={[styles.action, styles.update].join(" ")} onClick={handleCreateUser}>create</span>}
                         <span className={[styles.action, styles.update].join(" ")} style={{ backgroundColor: "black" }} onClick={() => { setIsCreate(!isCreate) }}>{isCreate ? "abort" : "+"}</span>
                     </td>

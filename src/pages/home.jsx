@@ -6,6 +6,9 @@ import { postMethod } from '../library/API';
 import ContentContainerSlider from '../components/contentContainerSlider';
 import ContentBanner from '../components/contentBanner';
 
+//https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4
+//https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
+
 function Home() {
     const { isLogin, setIsLogin } = useContext(loginContext);
     const { userData, setUserData } = useContext(loginContext);
@@ -26,11 +29,12 @@ function Home() {
 
     return (
         <div >
-            <ContentBanner src={'https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4'} title={"Ngoai gia hoi xuan"} description={trending && trending[0]?.description} />
+            <ContentBanner src={'https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4'} title={"Ngoai gia hoi xuan"} description={trending && trending[0]?.description} />
             <div className='content-container'>
                 <ContentContainerSlider label={"Thịnh Hành"} array={trending} />
                 <ContentContainerSlider label={"Phim bộ"} array={latestBo} />
                 <ContentContainerSlider label={"Phim lẻ"} array={latestLe} />
+                <ContentContainerSlider label={"Anime"} array={latestLe} />
             </div>
         </div>
     )

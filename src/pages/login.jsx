@@ -42,9 +42,7 @@ function Login() {
     const handleOnChange = (event, setState) => {
         setState(event.target.value);
     }
-
-    const handleOnClickLogin = async (event) => {
-        event.preventDefault();
+    const handleOnClickLogin = async () => {
         if (!email) {
             setResponse("*Email field must not be a blank");
             return;
@@ -80,6 +78,11 @@ function Login() {
     const handleOnClickNavigate = (url) => {
         navigate(url);
     }
+    const handleOnEnterDown = (e) => {
+        if (e.key == "Enter") {
+            handleOnClickLogin();
+        }
+    }
     return (
         <div className="container">
             <h1>WELCOME TO WEB FILM DEMO</h1>
@@ -87,8 +90,8 @@ function Login() {
             <WrapperBox>
                 <form style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "15px" }}>
                     <h2 style={{ textAlign: "center" }}>Login</h2>
-                    <Input type="text" value={email} placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setEmail)} />
-                    <Input type="password" value={password} placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} />
+                    <Input type="text" value={email} placeholder="Enter your email" label="Email" onChange={event => handleOnChange(event, setEmail)} onKeyDown={e => handleOnEnterDown(e)} />
+                    <Input type="password" value={password} placeholder="Enter your password" label="Password" onChange={event => handleOnChange(event, setPassword)} onKeyDown={e => handleOnEnterDown(e)} />
                     {response &&
                         <p style={{ margin: 0, textAlign: "left", color: "red" }}>{response}</p>
                     }

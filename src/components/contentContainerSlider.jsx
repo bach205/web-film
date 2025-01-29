@@ -7,7 +7,7 @@ function ContentContainerSlider({ label, array }) {
     const navigate = useNavigate();
 
     const handleOnClick = (item) => {
-        navigate(`watch/${item.id}/${item.title}/1`)
+        window.location.href = `http://localhost:5173/watch/${item.id}/${item.title}/1`
     }
 
     return (

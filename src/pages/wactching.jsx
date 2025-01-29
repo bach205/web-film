@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import styles from "../css/watching.module.css"
 import { getMethod, postMethod } from '../library/API';
 
@@ -9,6 +9,11 @@ import { getMethod, postMethod } from '../library/API';
 function Watching() {
     const { movieId, title, episode } = useParams();
     const [data, setData] = useState("");
+    const [isFetch, setIsFetch] = useState(false);
+
+    const handleOnClick = (movieId, title, episode) => {
+        window.location.href = `http://localhost:5173/watch/${movieId}/${title}/${episode}`
+    }
 
     const fetchData = async () => {
         let result = await getMethod(`http://localhost:8080/Web-film/api/movies/get-episode-data/${title}/${episode}`);
@@ -28,17 +33,22 @@ function Watching() {
         }
         let result = await postMethod(data, "http://localhost:8080/Web-film/api/movies/update-episode-view");
         result = await result.json();
-        alert(result.data);
     }
     useEffect(() => {
         fetchData();
-        updateView();
+        setIsFetch(true);
     }, [])
 
+    useEffect(() => {
+        if (isFetch) {
+            updateView();
+        }
+    }, [isFetch])
+    console.log(data)
     return (
         <div className='margin-header'>
             <div style={{ display: "flex", padding: "0 20px", flexDirection: "column" }}>
-                <iframe width="1400" height="600" src="https://www.youtube.com/embed/wojenfJRVwU?si=cnFQHW38eKB4kVsm" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                {/* <iframe width="1400" height="600" src="https://www.youtube.com/embed/wojenfJRVwU?si=cnFQHW38eKB4kVsm" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe> */}
 
                 <h3><span className={styles.secondary}>{"Tên phim: "}</span>{data?.title}</h3>
                 <p style={{ marginTop: "0" }}>
@@ -69,6 +79,16 @@ function Watching() {
                         <span>{data?.country}</span>
                     </span>
 
+                </div>
+                <div className={styles.episodeContainer}>
+                    <div className={styles.episodeWrapper}>
+                        {Array.from({ length: data?.totalEpisode }).map((_, index) => {
+                            let functionEpisode = index + 1;
+                            return (
+                                <span onClick={() => { handleOnClick(movieId, title, functionEpisode) }} key={index} className={styles.episode} style={functionEpisode == episode ? { backgroundColor: "brown" } : {}}>{functionEpisode}</span>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

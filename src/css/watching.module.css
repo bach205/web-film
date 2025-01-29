@@ -1,3 +1,24 @@
 .secondary {
     color: gray;
 }
+
+.episode {
+    width: 3em;
+    height: 1.5em;
+    background-color: black;
+    border-radius: 0.5em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.episodeWrapper {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    gap: 0.5em;
+}
+
+.episodeContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

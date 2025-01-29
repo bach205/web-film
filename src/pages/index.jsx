@@ -1,6 +1,7 @@
 import Home from "./home";
-import Login from "./Login";
+import Login from "./login";
 import Register from "./register";
 import ForgetPassword from "./forgetPassword";
 import UserManagement from "./userManagement";
-export default { Home, ForgetPassword, Login, Register, UserManagement }
+import Watching from "./wactching";
+export default { Home, ForgetPassword, Login, Register, UserManagement, Watching }

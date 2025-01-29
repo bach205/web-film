@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router"
-import { loginContext } from "../context/loginProvider";
+import { LoginContext } from "../context/loginProvider";
 import { postMethod } from "../library/API";
 import logoNoBackground from "../assets/bach_logo_nobackground.png";
 import "../css/header.css"
@@ -9,8 +9,8 @@ import Input from "./form/input";
 
 function Header() {
     const navigate = useNavigate();
-    const { isLogin, setIsLogin } = useContext(loginContext);
-    const { userData } = useContext(loginContext);
+    const { isLogin, setIsLogin } = useContext(LoginContext);
+    const { userData } = useContext(LoginContext);
 
     const [isOpenUserList, setIsOpenUserList] = useState(false);
 

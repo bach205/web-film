@@ -1,14 +1,14 @@
 import "../css/videoBox.css"
-function VideoBox({ children, url, title, description, genre, releaseDate, country }) {
+function VideoBox({ children, url, title, description, category, releaseDate, country, onClick }) {
 
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column" }} onClick={onClick}>
             <div className="video-box-container">
                 <img src={url} />
                 <span className="video-box-container-after">
                     <span id="thumnail-description">{description}</span>
                     <br />
-                    <span>{genre + " | " + country + " | " + releaseDate}</span>
+                    <span>{category + " | " + country + " | " + releaseDate}</span>
                 </span>
                 {children}
             </div>

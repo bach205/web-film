@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { loginContext } from '../context/loginProvider'
+import { LoginContext } from '../context/loginProvider'
 import "../css/home.css"
 import "../css/home.css"
 import { postMethod } from '../library/API';
@@ -10,8 +10,8 @@ import ContentBanner from '../components/contentBanner';
 //https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
 
 function Home() {
-    const { isLogin, setIsLogin } = useContext(loginContext);
-    const { userData, setUserData } = useContext(loginContext);
+    const { isLogin, setIsLogin } = useContext(LoginContext);
+    const { userData, setUserData } = useContext(LoginContext);
     const [trending, setTrending] = useState("");
     const [latestBo, setLatestBo] = useState("");
     const [latestLe, setLatestLe] = useState("");

@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { loginContext } from "../context/loginProvider";
+import { LoginContext } from "../context/loginProvider";
 
 const PrivateAdminRoute = ({ element }) => {
-    const { userData } = useContext(loginContext);
+    const { userData } = useContext(LoginContext);
     return (
         <>
             {(userData.role == 1 || userData.role == 2) ? element : <AuthorizationFailed />}

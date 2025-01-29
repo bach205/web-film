@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { loginContext } from '../context/loginProvider';
+import { LoginContext } from '../context/loginProvider';
 import WrapperBox from '../components/wrapperBox';
 import Button from '../components/form/button';
 import Input from '../components/form/input';
@@ -12,7 +12,7 @@ const handleOnChange = (event, setState) => {
 }
 
 function UserManagement() {
-    const { userData, setUserData } = useContext(loginContext);
+    const { userData, setUserData } = useContext(LoginContext);
     const [isChangePassWord, setIsChangePassWord] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [response, setResponse] = useState("");

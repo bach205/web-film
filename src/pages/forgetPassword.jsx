@@ -5,11 +5,11 @@ import WrapperBox from "../components/wrapperBox.jsx";
 import Input from "../components/form/input.jsx";
 import Button from "../components/form/button.jsx";
 import { useNavigate } from "react-router";
-import { loginContext } from "../context/loginProvider.jsx";
+import { LoginContext } from "../context/loginProvider.jsx";
 import { isValidEmail } from "../library/validate.js";
 
 function ForgetPassword() {
-    const { isLogin, setIsLogin } = useContext(loginContext);
+    const { isLogin, setIsLogin } = useContext(LoginContext);
     const [isReset, setIsReset] = useState(false);
     useEffect(() => {
         if (isLogin) {

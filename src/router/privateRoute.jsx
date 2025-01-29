@@ -1,9 +1,9 @@
 import { useContext } from "react"
-import { loginContext } from "../context/loginProvider"
+import { LoginContext } from "../context/loginProvider"
 import { Navigate } from "react-router";
 
 const PrivateRoute = ({ element }) => {
-    const { isLogin } = useContext(loginContext);
+    const { isLogin } = useContext(LoginContext);
     return (
         <>
             {isLogin ? element : <AuthorizationFailed />}

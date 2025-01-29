@@ -5,7 +5,7 @@ import WrapperBox from "../components/wrapperBox.jsx";
 import Input from "../components/form/input.jsx";
 import Button from "../components/form/button.jsx";
 import { useNavigate } from "react-router";
-import { loginContext } from "../context/loginProvider.jsx";
+import { LoginContext } from "../context/loginProvider.jsx";
 import { isValidEmail } from "../library/validate.js";
 
 function Login() {
@@ -15,7 +15,7 @@ function Login() {
     const [isRemember, setIsRemember] = useState(false);
 
     const [response, setResponse] = useState("");
-    const { isLogin, setIsLogin, setUserData } = useContext(loginContext);
+    const { isLogin, setIsLogin, setUserData } = useContext(LoginContext);
     useEffect(() => {
         let localPass = localStorage.getItem("password");
         let localEmail = localStorage.getItem("email");

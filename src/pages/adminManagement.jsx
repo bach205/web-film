@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "../css/AdminManagement.module.css";
 import { postMethod } from "../library/API";
-import { loginContext } from "../context/loginProvider";
+import { LoginContext } from "../context/loginProvider";
 
 //isCreate == actionId dung de xac nhan xem thay input vao row nao
 const defineGender = (item) => {
@@ -51,7 +51,7 @@ const UserTable = () => {
     const [listUser, setListUser] = useState("");
     const [refresh, setRefresh] = useState(false);
 
-    const { userData } = useContext(loginContext);
+    const { userData } = useContext(LoginContext);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [gender, setGender] = useState("");

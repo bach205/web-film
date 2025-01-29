@@ -5,13 +5,13 @@ import WrapperBox from "../components/wrapperBox.jsx";
 import Input from "../components/form/input.jsx";
 import Button from "../components/form/button.jsx";
 import { useNavigate } from "react-router";
-import { loginContext } from "../context/loginProvider.jsx";
+import { LoginContext } from "../context/loginProvider.jsx";
 import "../css/form/input.css"
 import { isValidEmail } from "../library/validate.js";
 
 function Register() {
-    const { isLogin, setIsLogin } = useContext(loginContext);
-    const { setUserData } = useContext(loginContext);
+    const { isLogin, setIsLogin } = useContext(LoginContext);
+    const { setUserData } = useContext(LoginContext);
     useEffect(() => {
         if (isLogin) {
             navigate("/")

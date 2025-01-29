@@ -14,4 +14,19 @@ const postMethod = async (data, url) => {
         return JSON.stringify({ status: 500, message: e });
     }
 }
-export { postMethod } 
+const getMethod = async (url) => {
+    try {
+        let result = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json;charset= utf-8",
+
+            },
+            credentials: "include"
+        });
+        return result;
+    } catch (e) {
+        return JSON.stringify({ status: 500, message: e });
+    }
+}
+export { postMethod, getMethod } 

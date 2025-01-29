@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { postMethod } from "../library/API";
 
-const loginContext = createContext();
+const LoginContext = createContext();
 
 const LoginProvider = ({ children }) => {
     const [isLogin, setIsLogin] = useState(false);
@@ -23,10 +23,10 @@ const LoginProvider = ({ children }) => {
     }, [])
 
     return (
-        <loginContext.Provider value={{ isLogin, setIsLogin, userData, setUserData }}>
+        <LoginContext.Provider value={{ isLogin, setIsLogin, userData, setUserData }}>
             {children}
-        </loginContext.Provider>
+        </LoginContext.Provider>
     )
 }
 
-export { LoginProvider, loginContext };
+export { LoginProvider, LoginContext };

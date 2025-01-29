@@ -1,7 +1,14 @@
+import { useNavigate } from "react-router";
 import "../css/contentContainerSlider.css"
 import { truncateString } from '../library/truncateString';
 import VideoBox from "./videoBox";
 function ContentContainerSlider({ label, array }) {
+
+    const navigate = useNavigate();
+
+    const handleOnClick = (item) => {
+        navigate(`watch/${item.id}/${item.title}/1`)
+    }
 
     return (
         <>
@@ -10,14 +17,14 @@ function ContentContainerSlider({ label, array }) {
                 {array != "" && array.map((item) => {
                     item.description = truncateString(item.description, 120)
                     return (
-                        <VideoBox url={item.imageURL} key={item.id} title={item.title} description={item.description} genre={item.genre} releaseDate={item.releaseDate} country={item.country} />
+                        <VideoBox url={item.imageURL} key={item.id} title={item.title} description={item.description} category={item.category} releaseDate={item.releaseDate} country={item.country} onClick={() => handleOnClick(item)} />
                     )
                 }
                 )}
                 {array != "" && array.map((item) => {
                     item.description = truncateString(item.description, 120)
                     return (
-                        <VideoBox url={item.imageURL} key={item.id} title={item.title} description={item.description} genre={item.genre} releaseDate={item.releaseDate} country={item.country} />
+                        <VideoBox url={item.imageURL} key={item.id} title={item.title} description={item.description} category={item.category} releaseDate={item.releaseDate} country={item.country} onClick={() => handleOnClick(item)} />
                     )
                 }
                 )}

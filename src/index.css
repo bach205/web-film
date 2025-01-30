@@ -68,6 +68,7 @@ ul {
 }
 
 .margin-header {
+  min-height: 30em;
   margin-top: 60px;
 }
 

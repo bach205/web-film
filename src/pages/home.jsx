@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { LoginContext } from '../context/loginProvider'
 import "../css/home.css"
 import "../css/home.css"
-import { postMethod } from '../library/API';
+import { getMethod, postMethod } from '../library/API';
 import ContentContainerSlider from '../components/contentContainerSlider';
 import ContentBanner from '../components/contentBanner';
 
@@ -18,7 +18,7 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            let result = await postMethod({}, "http://localhost:8080/Web-film/api/movies/load-trending-latest")
+            let result = await getMethod("http://localhost:8080/Web-film/api/movies/load-homepage")
             result = await result.json();
             setTrending(result.listData[0]);
             setLatestBo(result.listData[0]);
@@ -27,13 +27,21 @@ function Home() {
         fetchData()
     }, [])
 
+    const handleWatchNowClick = () => {
+        window.location.href = "http://localhost:5173/watch/1/B%E1%BA%A1ch%20Nguy%E1%BB%87t%20Ph%E1%BA%A1n%20Tinh/1";
+    }
+    const handleWatchLaterClick = () => {
+        alert("dang phat trien......")
+    }
+
     return (
         <div >
-            <ContentBanner src={'https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4'} title={"Ngoai gia hoi xuan"} description={trending && trending[0]?.description} />
+            <ContentBanner src={'https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4'} title={"Bạch Nguyệt Phạn Tinh"} description={trending && trending[0]?.description}
+                watchNowClick={handleWatchNowClick} watchLaterClick={handleWatchLaterClick} />
             <div className='content-container'>
                 <ContentContainerSlider label={"Thịnh Hành"} array={trending} />
-                <ContentContainerSlider label={"Phim bộ"} array={latestBo} />
-                <ContentContainerSlider label={"Phim lẻ"} array={latestLe} />
+                <ContentContainerSlider label={"Phim Bộ"} array={latestBo} />
+                <ContentContainerSlider label={"Phim Lẻ"} array={latestLe} />
                 <ContentContainerSlider label={"Anime"} array={latestLe} />
             </div>
         </div>

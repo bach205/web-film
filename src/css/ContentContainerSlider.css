@@ -1,7 +1,7 @@
 .content-container-slider {
     display: grid;
-    grid-template-columns: 230px 230px 230px 230px 230px 230px;
-    grid-auto-rows: 152px;
+    grid-template-columns: 14.5em 14.5em 14.5em 14.5em 14.5em 14.5em;
+    grid-auto-rows: 13.5em;
     column-gap: 5px;
     row-gap: 10px;
 }

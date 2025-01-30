@@ -13,6 +13,7 @@ function Header() {
     const { userData } = useContext(LoginContext);
 
     const [isOpenUserList, setIsOpenUserList] = useState(false);
+    const [titleSearch, setTitleSearch] = useState("");
 
     const handleNavigate = (url) => {
         navigate(url);
@@ -25,7 +26,9 @@ function Header() {
     }
 
     const onEnterDown = (e) => {
-        if (e.key == "Enter") alert("dang phat trien")
+        if (e.key == "Enter") {
+            window.location.href = `http://localhost:5173/search?title=${titleSearch}`;
+        }
     }
 
     let checkUser = userData?.role === 1 || userData?.role === 2
@@ -41,7 +44,7 @@ function Header() {
 
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                 <span id="find-icon"><i className="fa-solid fa-magnifying-glass"></i></span>
-                <Input type={"text"} placeholder={"Tìm kiếm"} className="medium-input" onKeyDown={onEnterDown} />
+                <Input type={"text"} placeholder={"Tìm kiếm"} className="medium-input" onKeyDown={onEnterDown} value={titleSearch} onChange={(event) => { setTitleSearch(event.target.value) }} />
             </div>
 
             <div>

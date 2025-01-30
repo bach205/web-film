@@ -17,7 +17,7 @@ function ContentContainerSlider({ label, array, episode = 1 }) {
                 {array != "" && array.map((item) => {
                     item.description = truncateString(item.description, 120)
                     return (
-                        <VideoBox url={item.imageURL} key={item.id} label={label} title={item.title} description={item.description} category={item.category} releaseDate={item.releaseDate} country={item.country} onClick={() => handleOnClick(item)} buttonClick={watchLaterClick}></VideoBox>
+                        <VideoBox url={item.imageURL} key={item.id} label={label} title={item.title} description={item.description} category={item.category} releaseDate={item.releaseDate} country={item.country} onClick={() => handleOnClick(item)} buttonClick={watchLaterClick} ></VideoBox>
                     )
                 }
                 )}

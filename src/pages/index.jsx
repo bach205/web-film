@@ -5,4 +5,5 @@ import ForgetPassword from "./forgetPassword";
 import UserManagement from "./userManagement";
 import Watching from "./wactching";
 import Search from "./search";
-export default { Home, ForgetPassword, Login, Register, UserManagement, Watching, Search }
+import WatchLater from "./watchLater";
+export default { Home, ForgetPassword, Login, Register, UserManagement, Watching, Search, WatchLater }

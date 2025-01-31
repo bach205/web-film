@@ -8,4 +8,5 @@ import VideoBox from "./videoBox";
 import ContentContainerSlider from "./contentContainerSlider";
 import ContentBanner from "./contentBanner";
 import { DropDown } from "./form/dropdown";
-export default { Header, Footer, Container, WrapperBox, Input, Button, VideoBox, ContentContainerSlider, ContentBanner, DropDown }
+import { Pagination } from "./pagination";
+export default { Header, Footer, Container, WrapperBox, Input, Button, VideoBox, ContentContainerSlider, ContentBanner, DropDown, Pagination }

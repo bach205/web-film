@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { postMethod } from "../library/API";
+import { getMethod } from "../library/API";
 
 const LoginContext = createContext();
 
@@ -10,7 +10,7 @@ const LoginProvider = ({ children }) => {
     //khi navigate cay xe bi reload nen can phai luu gia tri isLogin vao cuc bo
     useEffect(() => {
         const fetchData = async () => {
-            let result = await postMethod({}, "http://localhost:8080/Web-film/authentication");
+            let result = await getMethod("http://localhost:8080/Web-film/authentication");
             result = await result.json();
             if (result.status == 200) {
                 setIsLogin(true)
@@ -21,7 +21,8 @@ const LoginProvider = ({ children }) => {
         }
         fetchData();
     }, [])
-
+    console.log(isLogin);
+    console.log(userData)
     return (
         <LoginContext.Provider value={{ isLogin, setIsLogin, userData, setUserData }}>
             {children}

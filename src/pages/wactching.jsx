@@ -50,7 +50,7 @@ function Watching() {
     return (
         <div className='margin-header'>
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <iframe width="1400" height="600" src="https://www.youtube.com/embed/wojenfJRVwU?si=cnFQHW38eKB4kVsm" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                <iframe width="1400" height="600" src={data.videoURL} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 <h3><span className={styles.secondary}>{"Tên phim: "}</span>{data?.title}</h3>
                 <p style={{ marginTop: "0" }}>
                     <span className={styles.secondary}>View: </span>{data?.view}

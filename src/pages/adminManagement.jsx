@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "../css/AdminManagement.module.css";
-import { postMethod } from "../library/API";
+import { postMethod, getMethod } from "../library/API";
 import { LoginContext } from "../context/loginProvider";
+import { Pagination } from "../components/pagination";
 
 //isCreate == actionId dung de xac nhan xem thay input vao row nao
 const defineGender = (item) => {
@@ -48,7 +49,10 @@ export const AdminManagement = () => {
 
 
 const UserTable = () => {
-    const [listUser, setListUser] = useState("");
+    const [listUser, setListUser] = useState([]);
+    const [listUserEachPage, setListUserEachPage] = useState([]);
+    const [page, setPage] = useState("");
+    const [totalPage, setTotalPage] = useState("");
     const [refresh, setRefresh] = useState(false);
 
     const { userData } = useContext(LoginContext);
@@ -62,12 +66,18 @@ const UserTable = () => {
     const [isCreate, setIsCreate] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
-            let result = await postMethod({}, "http://localhost:8080/Web-film/user/get-all");
+            let result = await getMethod("http://localhost:8080/Web-film/user/get-all");
             result = await result.json();
             setListUser(result.data)
         }
         fetchData()
     }, [refresh])
+    const TOTAL_USER_EACH_PAGE = 15;
+    const TOTAL_COLUMN = 5
+    useEffect(() => {
+        setListUserEachPage(listUser.slice(TOTAL_USER_EACH_PAGE * (page - 1), (TOTAL_USER_EACH_PAGE * page)));
+        setTotalPage(Math.ceil(listUser.length / TOTAL_USER_EACH_PAGE))
+    }, [listUser, page])
 
     const handleCreateUser = async () => {
         let password = prompt("password of new user");
@@ -93,34 +103,37 @@ const UserTable = () => {
         }
     }
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                    <th >Gender</th>
-                    <th>Address</th>
-                    <th >Role</th>
-                    <th className={styles.actionContainer} >Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <RenderUser listUser={listUser} refresh={refresh} setRefresh={setRefresh} userData={userData} />
-                <tr style={{ height: "2em" }}>
-                    <td><InputCRUD value={isCreate == true ? firstName : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setFirstName) }} /></td>
-                    <td><InputCRUD value={isCreate == true ? lastName : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setLastName) }} /></td>
-                    <td><InputCRUD value={isCreate == true ? email : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setEmail) }} /></td>
-                    <td><DropDownCRUD array={arrayGender} value={isCreate == true ? gender : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setGender) }} /></td>
-                    <td><InputCRUD value={isCreate == true ? address : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setAddress) }} /></td>
-                    <td><DropDownCRUD array={arrayRole} value={isCreate == true ? role : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setRole) }} /></td>
-                    <td className={styles.action} >
-                        {isCreate && <span className={[styles.action, styles.update].join(" ")} onClick={handleCreateUser}>create</span>}
-                        <span className={[styles.action, styles.update].join(" ")} style={{ backgroundColor: "black" }} onClick={() => { setIsCreate(!isCreate) }}>{isCreate ? "abort" : "+"}</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                        <th >Gender</th>
+                        <th>Address</th>
+                        <th >Role</th>
+                        <th className={styles.actionContainer} >Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <RenderUser listUser={listUser} refresh={refresh} setRefresh={setRefresh} userData={userData} />
+                    <tr style={{ height: "2em" }}>
+                        <td><InputCRUD value={isCreate == true ? firstName : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setFirstName) }} /></td>
+                        <td><InputCRUD value={isCreate == true ? lastName : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setLastName) }} /></td>
+                        <td><InputCRUD value={isCreate == true ? email : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setEmail) }} /></td>
+                        <td><DropDownCRUD array={arrayGender} value={isCreate == true ? gender : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setGender) }} /></td>
+                        <td><InputCRUD value={isCreate == true ? address : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setAddress) }} /></td>
+                        <td><DropDownCRUD array={arrayRole} value={isCreate == true ? role : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setRole) }} /></td>
+                        <td className={styles.action} >
+                            {isCreate && <span className={[styles.action, styles.update].join(" ")} onClick={handleCreateUser}>create</span>}
+                            <span className={[styles.action, styles.update].join(" ")} style={{ backgroundColor: "black" }} onClick={() => { setIsCreate(!isCreate) }}>{isCreate ? "abort" : "+"}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <Pagination page={page} setPage={setPage} totalPage={totalPage} totalColumn={TOTAL_COLUMN} />
+        </>
     )
 }
 const RenderUser = ({ listUser, refresh, setRefresh, userData }) => {

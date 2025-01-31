@@ -27,17 +27,11 @@ function Home() {
         fetchData()
     }, [])
 
-    const handleWatchNowClick = () => {
-        window.location.href = "http://localhost:5173/watch/1/B%E1%BA%A1ch%20Nguy%E1%BB%87t%20Ph%E1%BA%A1n%20Tinh/1";
-    }
-    const handleWatchLaterClick = () => {
-        alert("dang phat trien......")
-    }
 
     return (
         <div >
             <ContentBanner src={'https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4'} title={"Bạch Nguyệt Phạn Tinh"} description={trending && trending[0]?.description}
-                watchNowClick={handleWatchNowClick} watchLaterClick={handleWatchLaterClick} />
+                item={trending[0]} />
             <div className='content-container'>
                 <ContentContainerSlider label={"Thịnh Hành"} array={trending} />
                 <ContentContainerSlider label={"Phim Bộ"} array={latestBo} />

@@ -10,6 +10,7 @@ import { PrivateAdminRoute } from "./privateAdminRoute"
 import { AdminManagement } from "../pages/adminManagement"
 import Watching from "../pages/wactching"
 import Search from "../pages/search"
+import WatchLater from "../pages/watchLater"
 
 function AppRouter() {
 
@@ -24,6 +25,7 @@ function AppRouter() {
                 </Route>
                 <Route path="watch/:movieId/:title/:episode" element={<Watching />} />
                 <Route path="search" element={<Search />} />
+                <Route path="watch-later" element={<PrivateRoute element={<WatchLater />} />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

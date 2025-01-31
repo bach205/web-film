@@ -3,9 +3,9 @@ import { useSearchParams } from 'react-router';
 import Button from '../components/form/button';
 import { DropDown } from '../components/form/dropdown';
 import Input from '../components/form/input';
-import styles from "../css/watching.module.css"
 import { getMethod } from '../library/API';
 import ContentContainerSlider from '../components/contentContainerSlider';
+import { Pagination } from '../components/pagination';
 
 //https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4
 //https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
@@ -99,6 +99,7 @@ function Search() {
     }
     const searchMovie = async () => {
         let result = await fetchData();
+        insertionSort(result.data, arrange)
         setListMovie(result.data);
     }
 
@@ -110,16 +111,32 @@ function Search() {
             searchMovie();
         }
     }
+
+    function insertionSort(arr, key) {
+        for (let i = 1; i < arr.length; i++) {
+            let current = arr[i];
+            let j = i - 1;
+
+            // Dịch chuyển các phần tử có giá trị nho hơn `current[key]` sang phải
+            while (j >= 0 && arr[j][key] < current[key]) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+
+            // Chèn `current` vào vị trí thích hợp
+            arr[j + 1] = current;
+        }
+        return arr;
+    }
     useEffect(() => {
         searchMovie();
     }, [])
-
-    const TOTAL_VIDEO_PER_PAGE = 1;
+    console.log(listMovie)
+    const TOTAL_VIDEO_PER_PAGE = 30;
     const TOTAL_COLUMN = 5
     useEffect(() => {
         setListMovieEachPage(listMovie.slice(TOTAL_VIDEO_PER_PAGE * (page - 1), (TOTAL_VIDEO_PER_PAGE * page)));
-        // setTotalPage(Math.ceil(listMovie.length / TOTAL_VIDEO_PER_PAGE))
-        setTotalPage(20);
+        setTotalPage(Math.ceil(listMovie.length / TOTAL_VIDEO_PER_PAGE))
     }, [listMovie, page])
 
     return (
@@ -140,36 +157,7 @@ function Search() {
             <h2 style={{ color: "aqua" }}>Danh sách phim đã được lọc</h2>
 
             <ContentContainerSlider array={listMovieEachPage} episode={1} />
-            <div className={styles.episodeContainer}>
-                <div className={styles.episodeWrapper}>
-                    {page > 3 && (
-                        <>
-                            <span className={styles.episode} style={{ backgroundColor: "aliceblue", color: "black" }} onClick={() => setPage(1)}>{"<<"}</span>
-                            <span>....</span>
-                        </>
-                    )}
-                    {Array.from({ length: TOTAL_COLUMN }).map((_, index) => {
-                        let functionPage
-                        if (page <= 3) {
-                            functionPage = index + 1;
-                        } else if (page > totalPage - 3) {
-                            functionPage = index + totalPage - 4
-                        } else {
-                            functionPage = index + page - 2
-                        }
-                        return (
-                            <span onClick={() => { setPage(functionPage) }} key={index} className={styles.episode} style={functionPage == page ? { backgroundColor: "brown" } : {}}>{functionPage}</span>
-                        )
-                    })}
-                    {page <= totalPage - 3 && (
-                        <>
-                            <span>....</span>
-                            <span className={styles.episode} style={{ backgroundColor: "aliceblue", color: "black" }} onClick={() => setPage(totalPage)}>{">>"}</span>
-                        </>
-                    )}
-
-                </div>
-            </div>
+            <Pagination totalPage={totalPage} page={page} setPage={setPage} totalColumn={TOTAL_COLUMN} />
         </div>
     )
 }

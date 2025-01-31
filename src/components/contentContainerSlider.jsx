@@ -2,13 +2,6 @@ import "../css/contentContainerSlider.css";
 import { truncateString } from '../library/truncateString';
 import VideoBox from "./videoBox";
 function ContentContainerSlider({ label, array, episode = 1 }) {
-    const handleOnClick = (data) => {
-        window.location.href = `http://localhost:5173/watch/${data.id}/${data.title}/${episode}`
-    }
-
-    const watchLaterClick = () => {
-        alert("dang phat trien...")
-    }
 
     return (
         <>
@@ -17,14 +10,14 @@ function ContentContainerSlider({ label, array, episode = 1 }) {
                 {array != "" && array.map((item) => {
                     item.description = truncateString(item.description, 120)
                     return (
-                        <VideoBox url={item.imageURL} key={item.id} label={label} title={item.title} description={item.description} category={item.category} releaseDate={item.releaseDate} country={item.country} onClick={() => handleOnClick(item)} buttonClick={watchLaterClick} ></VideoBox>
+                        <VideoBox item={item} key={item.id} label={label} episode={episode} ></VideoBox>
                     )
                 }
                 )}
                 {array != "" && array.map((item) => {
                     item.description = truncateString(item.description, 120)
                     return (
-                        <VideoBox url={item.imageURL} key={item.id} label={label} title={item.title} description={item.description} category={item.category} releaseDate={item.releaseDate} country={item.country} onClick={() => handleOnClick(item)} buttonClick={watchLaterClick}></VideoBox>
+                        <VideoBox item={item} key={item.id} label={label} episode={episode}></VideoBox>
                     )
                 }
                 )}

@@ -10,8 +10,6 @@ import ContentBanner from '../components/contentBanner';
 //https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
 
 function Home() {
-    const { isLogin, setIsLogin } = useContext(LoginContext);
-    const { userData, setUserData } = useContext(LoginContext);
     const [trending, setTrending] = useState("");
     const [latestBo, setLatestBo] = useState("");
     const [latestLe, setLatestLe] = useState("");
@@ -20,9 +18,10 @@ function Home() {
         const fetchData = async () => {
             let result = await getMethod("http://localhost:8080/Web-film/api/movies/load-homepage")
             result = await result.json();
+            console.log(result)
             setTrending(result.listData[0]);
-            setLatestBo(result.listData[0]);
-            setLatestLe(result.listData[0]);
+            setLatestBo(result.listData[1]);
+            setLatestLe(result.listData[2]);
         }
         fetchData()
     }, [])

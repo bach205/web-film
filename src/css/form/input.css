@@ -13,7 +13,8 @@
 
 .default-input:focus,
 .default-input-half:focus,
-.medium-input:focus {
+.medium-input:focus,
+.description:focus {
     outline: none;
     border: solid 1px aqua;
 }
@@ -30,4 +31,12 @@
     height: 30px;
     border-radius: 10px;
     padding: 2px 35px;
+}
+
+.description {
+    word-wrap: break-word;
+    width: 309px;
+    height: 300px;
+    border-radius: 10px;
+    padding: 2px 20px;
 }

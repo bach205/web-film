@@ -14,13 +14,6 @@ function ContentContainerSlider({ label, array, episode = 1 }) {
                     )
                 }
                 )}
-                {array != "" && array.map((item) => {
-                    item.description = truncateString(item.description, 120)
-                    return (
-                        <VideoBox item={item} key={item.id} label={label} episode={episode}></VideoBox>
-                    )
-                }
-                )}
             </div>
 
         </>

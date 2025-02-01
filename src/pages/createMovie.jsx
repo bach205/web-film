@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { getMethod } from "../library/API";
+import { getMethod, postMethod } from "../library/API";
+import Button from "../components/form/button"
 import Input from "../components/form/input";
 import { DropDown } from "../components/form/dropdown";
+import WrapperBox from "../components/wrapperBox";
 
 
 function CreateMovie() {
@@ -13,6 +15,12 @@ function CreateMovie() {
     const [country, setCountry] = useState("");
     const [releaseDate, setReleaseDate] = useState(0);
     const [category, setCategory] = useState("");
+    const [episode, setEpisode] = useState(0);
+    const [videoURL, setVideoURL] = useState("");
+
+    const [listGenre, setListGenre] = useState([]);
+    const [genreRemove, setGenreRemove] = useState("");
+    const [response, setResponse] = useState("");
 
     const genreArray = [
         { name: "Thể Loại", value: "" },
@@ -77,52 +85,92 @@ function CreateMovie() {
     const handleOnChange = (event, setState) => {
         setState(event.target.value);
     }
-    const fetchData = async () => {
-    }
+
 
     useEffect(() => {
-        fetchData();
-    }, [])
+        if (genre && !listGenre.includes(genre)) {
+            setListGenre(listGenre => [...listGenre, genre])
+        }
+    }, [genre])
+
+    useEffect(() => {
+        if (genreRemove) {
+            setListGenre(listGenre.filter(item => item != genreRemove));
+        }
+    }, [genreRemove])
+
+    const handleOnClick = () => {
+        const data = [
+            title,
+            description,
+            category,
+            parseInt(releaseDate),
+            country,
+            imageURL,
+            parseInt(episode),
+            videoURL,
+            listGenre
+        ]
+        const postData = async () => {
+            console.log(data)
+            let result = await postMethod(data, `http://localhost:8080/Web-film/api/movies/authorization/add-movie`)
+            result = await result.json();
+            setResponse(result.message)
+        }
+        postData();
+    }
+
+
 
     return (
-        <div className='margin-header'>
-            <div className="flex-column">
-                <div className="flex-row">
-                    <Input label={"Title"} placeholder={"Title"} className={"default-input-half"} type={"text"} onChange={(event) => handleOnChange(event, setTitle)} />
-                    <Input label={"Description"} placeholder={"Description"} className={"default-input-half"} type={"text"} onChange={(event) => handleOnChange(event, setDescription)} />
-                </div>
-                <div>
-                    <Input label={"ImageURL"} placeholder={"ImageURL"} className={"default-input"} type={"text"} onChange={(event) => handleOnChange(event, setImageURL)} />
-                </div>
-                <div className="flex-row">
-                    <DropDown value={genre} style={{ width: "12em" }} array={genreArray} onChange={(event) => handleOnChange(event, setGenre)} />
-                    <DropDown value={country} style={{ width: "12em" }} array={countryArray} onChange={(event) => handleOnChange(event, setCountry)} />
-                    <DropDown value={releaseDate} style={{ width: "12em" }} array={releaseDateArray} onChange={(event) => handleOnChange(event, setReleaseDate)} />
-                    <DropDown value={category} style={{ width: "12em" }} array={categoryArray} onChange={(event) => handleOnChange(event, setCategory)} />
-                </div>
+        <div>
+            <div className='margin-header  flex-row ' style={{ justifyContent: "center", marginTop: "100px" }} >
+                <WrapperBox style={{ width: "70em", alignItems: "center" }}>
+                    <div className="flex-row" style={{ justifyContent: "space-between" }}>
+                        <div className="flex-column" style={{ alignItems: "flex-start" }}>
+                            <div className="flex-row">
+                                <Input value={title} label={"Title"} placeholder={"Title"} className={"default-input"} type={"text"} onChange={(event) => handleOnChange(event, setTitle)} />
+                                <Input value={episode} className="default-input-half" label={"Episode"} placeholder={"episode"} type={"text"} onChange={(event) => { handleOnChange(event, setEpisode) }} />
+                            </div>
+                            <div className="flex-row" style={{ alignItems: "flex-end" }}>
+                                <Input value={imageURL} label={"ImageURL"} placeholder={"http://imageurl.com"} className={"default-input"} type={"text"} onChange={(event) => handleOnChange(event, setImageURL)} />
+                                <DropDown value={category} style={{ width: "12em" }} array={categoryArray} onChange={(event) => handleOnChange(event, setCategory)} />
+                            </div>
+
+                            <div className="flex-column">
+                                <label>description</label>
+                                <textarea rows={7} cols={80} value={description} onChange={(event) => handleOnChange(event, setDescription)}></textarea>
+                            </div>
+                        </div>
+                        <div className="flex-column" style={{ alignItems: "flex-start" }}>
+
+                            <Input value={videoURL} label={"VideoURL"} placeholder={"http://videourl.com"} type={"text"} onChange={(event) => { handleOnChange(event, setVideoURL) }} />
+                            <div className="flex-row" >
+                                <DropDown value={country} style={{ width: "12em" }} array={countryArray} onChange={(event) => handleOnChange(event, setCountry)} />
+                                <DropDown value={releaseDate} style={{ width: "12em" }} array={releaseDateArray} onChange={(event) => handleOnChange(event, setReleaseDate)} />
+                            </div>
+                            <div className="flex-row">
+
+                                <DropDown value={""} style={{ width: "12em" }} array={genreArray} onChange={(event) => handleOnChange(event, setGenre)} />
+                            </div>
+                            <div style={{ display: 'grid', gridTemplateColumns: "auto auto auto auto", gap: "2px" }}>
+                                {listGenre.length != 0 && listGenre.map((item) => {
+                                    return (
+                                        <span key={item} style={{ margin: "0 3px", backgroundColor: "black", color: "white", padding: "2px 5px", borderRadius: "8px", cursor: "pointer", textAlign: "center" }} onClick={() => setGenreRemove(item)}>{item}</span>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    {response && (
+                        <p style={{ color: response == "ok" ? "green" : "red", alignSelf: "center" }}>{response}</p>
+                    )}
+                    <Button onClick={handleOnClick} style={{ alignSelf: "center" }}>+ create +</Button>
+                </WrapperBox>
+
             </div>
         </div>
     )
 }
 
-const TopStatic = ({ movie, label }) => {
-    return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-            <h3 style={{ color: "aqua", textAlign: "center" }}>{label}</h3>
-            {movie && movie.map((movie) => {
-                return (
-                    <div key={movie.movieId} style={{ display: "inline-flex", flexDirection: "row", gap: "10px", border: "solid 2px gray", width: "29em" }}>
-                        <img src={movie.imageURL} width={"200em"} height={"auto"} />
-                        <div style={{ padding: "0 10px" }}>
-                            <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>Title: </span>{movie.title}</p>
-                            <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>View: </span>{movie.view}</p>
-                            <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>View per episode: </span>{movie.totalEpisode}</p>
-                            <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>Total episode: </span>{Math.floor(movie.view / movie.totalEpisode)}</p>
-                        </div>
-                    </div>
-                )
-            })}
-        </div>
-    )
-}
 export default CreateMovie

@@ -18,7 +18,7 @@ function UserManagement() {
     const [response, setResponse] = useState("");
 
     return (
-        <div className='margin-header'>
+        <div className='container margin-header' style={{ padding: "0" }}>
             <div className='userManagement-form-container'>
 
                 <WrapperBox>
@@ -109,7 +109,7 @@ const Information = ({ userData, setUserData, response, setResponse, isSuccess, 
         { value: 2, name: "Unknown" }
     ]
     return (
-        <>
+        <WrapperBox>
             <h3 style={{ textAlign: "center" }}>Update your information</h3>
             <div style={{ display: "flex", gap: "15px", flexDirection: "row" }}>
                 {/* first name */}
@@ -125,7 +125,7 @@ const Information = ({ userData, setUserData, response, setResponse, isSuccess, 
                 <p style={{ margin: 0, textAlign: "left", color: isSuccess ? "green" : "red" }}>{response}</p>
             }
             <Button type='default-button' onClick={(handleOnSubmit)}>Submit</Button>
-        </>
+        </WrapperBox>
     )
 }
 const ChangePassword = ({ userData, setUserData, response, setResponse, isSuccess, setIsSuccess }) => {
@@ -179,7 +179,8 @@ const ChangePassword = ({ userData, setUserData, response, setResponse, isSucces
 
 
     return (
-        <>
+        <WrapperBox>
+            <h3 style={{ textAlign: "center" }}>Update your password</h3>
             <Input type="password" placeholder="Enter your currentPassword" label="Current password" onChange={event => handleOnChange(event, setCurrentPassword)} />
             <Input type="password" placeholder="Enter your password" label="new password" onChange={event => handleOnChange(event, setNewPassword)} />
             <Input type="password" placeholder="Confirm your password" label="Confirm new Password" onChange={event => handleOnChange(event, setConfirmNewPassword)} />
@@ -187,7 +188,7 @@ const ChangePassword = ({ userData, setUserData, response, setResponse, isSucces
                 <p style={{ margin: 0, textAlign: "left", color: isSuccess ? "green" : "red" }}>{response}</p>
             }
             <Button type='default-button' onClick={handleOnSubmit}>Submit</Button>
-        </>
+        </WrapperBox>
     )
 }
 

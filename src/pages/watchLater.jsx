@@ -19,7 +19,7 @@ function WatchLater() {
 
     useEffect(() => {
         const fetchData = async () => {
-            let result = await getMethod(`http://localhost:8080/Web-film/api/movies/load-watchlater?userId=${userData?.id}`);
+            let result = await getMethod(`http://localhost:8080/Web-film/api/movies/authorization/load-watchlater?userId=${userData?.id}`);
             result = await result.json();
             setListMovie(result.data)
         }
@@ -35,26 +35,31 @@ function WatchLater() {
 
     return (
         <div className='margin-header'>
-            <h1>Watch Later List</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th style={{ width: "4em" }}>Title</th>
-                        <th style={{ width: "15em" }}>Image</th>
-                        <th style={{ width: "40em" }}>Descrition</th>
-                        <th style={{ width: "4em" }}>Detail</th>
-                        <th style={{ width: "3em" }}>View</th>
-                        <th className={styles.actionContainer} style={{ width: "3em", color: "black" }}>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {listMovieEachPage.map((item) => {
-                        return (
-                            <WatchLaterList movie={item} key={item.movieId} refresh={refresh} setRefresh={setRefresh} userData={userData} />
-                        )
-                    })}
-                </tbody>
-            </table>
+            <h1 style={{ color: "aqua" }}>Watch Later List</h1>
+            {listMovie.length != 0 && (
+                <>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style={{ width: "4em" }}>Title</th>
+                                <th style={{ width: "15em" }}>Image</th>
+                                <th style={{ width: "40em" }}>Descrition</th>
+                                <th style={{ width: "4em" }}>Detail</th>
+                                <th style={{ width: "3em" }}>View</th>
+                                <th className={styles.actionContainer} style={{ width: "3em", color: "black" }}>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listMovieEachPage.map((item) => {
+                                return (
+                                    <WatchLaterList movie={item} key={item.movieId} refresh={refresh} setRefresh={setRefresh} userData={userData} />
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </>
+            )}
+            {listMovie.length == 0 && <h3>you haven't add any movie yet</h3>}
             <Pagination totalPage={totalPage} page={page} setPage={setPage} totalColumn={TOTAL_COLUMN} />
         </div>
     )
@@ -67,7 +72,7 @@ const WatchLaterList = ({ movie, refresh, setRefresh, userData }) => {
             movieId: item?.movieId
         }
         const postData = async () => {
-            let result = await postMethod(data, "http://localhost:8080/Web-film/api/movies/delete-watchlater");
+            let result = await postMethod(data, "http://localhost:8080/Web-film/api/movies/authorization/delete-watchlater");
             if (result.status == 200) {
                 setRefresh(!refresh);
             }

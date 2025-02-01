@@ -156,8 +156,13 @@ function Search() {
             </div>
             <h2 style={{ color: "aqua" }}>Danh sách phim đã được lọc</h2>
 
-            <ContentContainerSlider array={listMovieEachPage} episode={1} />
-            <Pagination totalPage={totalPage} page={page} setPage={setPage} totalColumn={TOTAL_COLUMN} />
+            {listMovie.length != 0 && (
+                <>
+                    <ContentContainerSlider array={listMovieEachPage} episode={1} />
+                    <Pagination totalPage={totalPage} page={page} setPage={setPage} totalColumn={TOTAL_COLUMN} />
+                </>
+            )}
+            {listMovie.length == 0 && <h3>No result found</h3>}
         </div>
     )
 }

@@ -66,7 +66,7 @@ const UserTable = () => {
     const [isCreate, setIsCreate] = useState(false)
     useEffect(() => {
         const fetchData = async () => {
-            let result = await getMethod("http://localhost:8080/Web-film/user/get-all");
+            let result = await getMethod("http://localhost:8080/Web-film/user/authorization/get-all");
             result = await result.json();
             setListUser(result.data)
         }
@@ -145,7 +145,7 @@ const RenderUser = ({ listUser, refresh, setRefresh, userData }) => {
 
     const [actionId, setActionId] = useState("");
     const handleDelete = async (id) => {
-        let result = await postMethod({}, `http://localhost:8080/Web-film/user/delete-user/${id}`);
+        let result = await postMethod({}, `http://localhost:8080/Web-film/user/authorization/authorization/delete-user/${id}`);
         result = await result.json();
         setRefresh(!refresh);
     }
@@ -166,7 +166,7 @@ const RenderUser = ({ listUser, refresh, setRefresh, userData }) => {
             address,
             role
         }
-        let result = await postMethod(data, "http://localhost:8080/Web-film/user/update-by-admin");
+        let result = await postMethod(data, "http://localhost:8080/Web-film/user/authorization/update-by-admin");
         result = await result.json();
         setActionId("");
         setRefresh(!refresh);

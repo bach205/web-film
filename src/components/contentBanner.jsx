@@ -16,7 +16,7 @@ function ContentBanner({ src, title, description, item }) {
         if (userData) {
             let data = {
                 userId: userData?.id,
-                movieId: item.id
+                movieId: item.id || item.movieId
             }
             let result = await postMethod(data, "http://localhost:8080/Web-film/api/movies/add-to-watchlater");
             result = await result.json();

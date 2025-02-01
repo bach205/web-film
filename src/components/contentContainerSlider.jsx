@@ -7,10 +7,10 @@ function ContentContainerSlider({ label, array, episode = 1 }) {
         <>
             <h2 style={{ color: "aqua" }}>{label}</h2>
             <div className='content-container-slider'>
-                {array != "" && array.map((item) => {
+                {array.length != 0 && array.map((item) => {
                     item.description = truncateString(item.description, 120)
                     return (
-                        <VideoBox item={item} key={item.id} label={label} episode={episode} ></VideoBox>
+                        <VideoBox item={item} key={item.id || item.movieId} label={label} episode={episode} ></VideoBox>
                     )
                 }
                 )}

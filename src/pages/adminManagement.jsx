@@ -75,8 +75,8 @@ const UserTable = () => {
     const TOTAL_USER_EACH_PAGE = 15;
     const TOTAL_COLUMN = 5
     useEffect(() => {
-        setListUserEachPage(listUser.slice(TOTAL_USER_EACH_PAGE * (page - 1), (TOTAL_USER_EACH_PAGE * page)));
-        setTotalPage(Math.ceil(listUser.length / TOTAL_USER_EACH_PAGE))
+        setListUserEachPage(listUser.slice(TOTAL_USER_EACH_PAGE * (page - 1), (TOTAL_USER_EACH_PAGE * page)) || []);
+        setTotalPage(Math.ceil(listUser.length / TOTAL_USER_EACH_PAGE) || 1)
     }, [listUser, page])
 
     const handleCreateUser = async () => {

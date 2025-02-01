@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router"
 import { LoginContext } from "../context/loginProvider";
-import { getMethod } from "../library/API";
+import { getMethod, postMethod } from "../library/API";
 import logoNoBackground from "../assets/bach_logo_nobackground.png";
 import "../css/header.css"
 import Button from "./form/button";
@@ -20,7 +20,7 @@ function Header() {
     }
 
     const handleLogout = async () => {
-        await getMethod("http://localhost:8080/Web-film/authentication/reset-session-cookie");
+        await postMethod({}, "http://localhost:8080/Web-film/authentication/reset-session-cookie");
         setIsLogin(false);
         setUserData("");
     }
@@ -63,14 +63,14 @@ function Header() {
                             }}></button>
                             {isOpenUserList &&
                                 <ul className="user-list">
-                                    <li onClick={() => { handleNavigate("management/user") }}>Hồ sơ cá nhân</li>
-                                    {checkUser && <li onClick={() => { handleNavigate("management/admin") }}>Admin management (CRUD)</li>}
+                                    <li onClick={() => { handleNavigate("management/user") }}><i className="fa-solid fa-circle-user"></i>Hồ sơ cá nhân</li>
+                                    {checkUser && <li onClick={() => { handleNavigate("management/admin") }}><i className="fa-solid fa-list-check"></i>Admin management</li>}
+                                    {checkUser && <li onClick={() => { handleNavigate("management/movie") }}><i className="fa-regular fa-square-plus"></i>Create movie</li>}
                                     <div style={{ border: "solid 1px black" }}></div>
-                                    <li onClick={() => { handleNavigate("watch-later") }}>Xem sau (giỏ hàng)</li>
-                                    <li>Lịch sử xem</li>
-                                    <li>Đang phát triển...</li>
+                                    <li onClick={() => { handleNavigate("watch-later") }}><i className="fa-solid fa-clock"></i>Xem sau (giỏ hàng)</li>
+                                    <li onClick={() => handleNavigate("/statics")}><i className="fa-solid fa-square-poll-vertical"></i>Thống kê trang web</li>
                                     <div style={{ border: "solid 1px black" }}></div>
-                                    <li onClick={handleLogout}>Đăng xuất</li>
+                                    <li onClick={handleLogout}><i className="fa-solid fa-right-from-bracket"></i>Đăng xuất</li>
                                 </ul>}
                         </div>
                     </div>)

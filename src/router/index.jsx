@@ -11,6 +11,8 @@ import { AdminManagement } from "../pages/adminManagement"
 import Watching from "../pages/wactching"
 import Search from "../pages/search"
 import WatchLater from "../pages/watchLater"
+import CreateMovie from "../pages/createMovie"
+import Statics from "../pages/statics"
 
 function AppRouter() {
 
@@ -22,10 +24,13 @@ function AppRouter() {
                 <Route path="management">
                     <Route path="user" element={<PrivateRoute element={<UserManagement />} />} />
                     <Route path="admin" element={<PrivateAdminRoute element={<AdminManagement />} />} />
+                    <Route path="movie" element={<PrivateAdminRoute element={<CreateMovie />} />} />
                 </Route>
                 <Route path="watch/:movieId/:title/:episode" element={<Watching />} />
                 <Route path="search" element={<Search />} />
                 <Route path="watch-later" element={<PrivateRoute element={<WatchLater />} />} />
+                <Route path="statics" element={<Statics />} />
+
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

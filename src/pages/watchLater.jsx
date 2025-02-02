@@ -28,8 +28,8 @@ function WatchLater() {
     const TOTAL_VIDEO_PER_PAGE = 10;
     const TOTAL_COLUMN = 5
     useEffect(() => {
-        setListMovieEachPage(listMovie.slice(TOTAL_VIDEO_PER_PAGE * (page - 1), (TOTAL_VIDEO_PER_PAGE * page)) || []);
-        setTotalPage(Math.ceil(listMovie.length / TOTAL_VIDEO_PER_PAGE) || 1)
+        setListMovieEachPage(listMovie.slice(TOTAL_VIDEO_PER_PAGE * (page - 1), (TOTAL_VIDEO_PER_PAGE * page)));
+        setTotalPage(Math.ceil(listMovie.length / TOTAL_VIDEO_PER_PAGE))
     }, [listMovie, page])
 
 

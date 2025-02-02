@@ -51,7 +51,7 @@ export const AdminManagement = () => {
 const UserTable = () => {
     const [listUser, setListUser] = useState([]);
     const [listUserEachPage, setListUserEachPage] = useState([]);
-    const [page, setPage] = useState("");
+    const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState("");
     const [refresh, setRefresh] = useState(false);
 
@@ -64,6 +64,8 @@ const UserTable = () => {
     const [email, setEmail] = useState("");
 
     const [isCreate, setIsCreate] = useState(false)
+    const [response, setResponse] = useState("");
+    const [isSuccess, setIsSuccess] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             let result = await getMethod("http://localhost:8080/Web-film/user/authorization/get-all");
@@ -75,9 +77,17 @@ const UserTable = () => {
     const TOTAL_USER_EACH_PAGE = 15;
     const TOTAL_COLUMN = 5
     useEffect(() => {
-        setListUserEachPage(listUser.slice(TOTAL_USER_EACH_PAGE * (page - 1), (TOTAL_USER_EACH_PAGE * page)) || []);
-        setTotalPage(Math.ceil(listUser.length / TOTAL_USER_EACH_PAGE) || 1)
+        setListUserEachPage(listUser.slice(TOTAL_USER_EACH_PAGE * (page - 1), (TOTAL_USER_EACH_PAGE * page)));
+        setTotalPage(Math.ceil(listUser.length / TOTAL_USER_EACH_PAGE))
     }, [listUser, page])
+
+    useEffect(() => {
+        if (response) {
+            setTimeout(() => {
+                setResponse("");
+            }, [2000])
+        }
+    }, [response])
 
     const handleCreateUser = async () => {
         let password = prompt("password of new user");
@@ -91,19 +101,29 @@ const UserTable = () => {
                 email,
                 password
             }
-            let result = await postMethod(data, "http://localhost:8080/Web-film/user/registration");
+            console.log(data)
+            let result = await postMethod(data, "http://localhost:8080/Web-film/user/authorization/registration");
             result = await result.json();
             if (result.status == 200) {
                 setIsCreate(false);
                 setRefresh(!refresh);
-                alert(result.message);
+                setResponse(result.message);
+                setIsSuccess(true)
             } else {
-                alert(result.message);
+                setResponse(result.message);
+                setIsSuccess(false);
             }
+        } else {
+            setResponse("mat khau khong duoc rong")
+            setIsSuccess(false);
         }
     }
     return (
         <>
+            <p style={{ backgroundColor: isSuccess ? "green" : "red", opacity: response ? 1 : 0 }} className={styles.responseBox}>
+                {(isSuccess) ? <i className="fa-solid fa-circle-check"></i> : <i className="fa-solid fa-ban"></i>}
+                {response}
+            </p>
             <table>
                 <thead>
                     <tr>
@@ -117,7 +137,7 @@ const UserTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <RenderUser listUser={listUser} refresh={refresh} setRefresh={setRefresh} userData={userData} />
+                    <RenderUser listUser={listUserEachPage} refresh={refresh} setRefresh={setRefresh} userData={userData} setResponse={setResponse} setIsSuccess={setIsSuccess} />
                     <tr style={{ height: "2em" }}>
                         <td><InputCRUD value={isCreate == true ? firstName : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setFirstName) }} /></td>
                         <td><InputCRUD value={isCreate == true ? lastName : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setLastName) }} /></td>
@@ -133,10 +153,11 @@ const UserTable = () => {
                 </tbody>
             </table>
             <Pagination page={page} setPage={setPage} totalPage={totalPage} totalColumn={TOTAL_COLUMN} />
+
         </>
     )
 }
-const RenderUser = ({ listUser, refresh, setRefresh, userData }) => {
+const RenderUser = ({ listUser, refresh, setRefresh, userData, setResponse, setIsSuccess }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [gender, setGender] = useState("");
@@ -145,8 +166,15 @@ const RenderUser = ({ listUser, refresh, setRefresh, userData }) => {
 
     const [actionId, setActionId] = useState("");
     const handleDelete = async (id) => {
-        let result = await postMethod({}, `http://localhost:8080/Web-film/user/authorization/authorization/delete-user/${id}`);
+        let result = await postMethod({}, `http://localhost:8080/Web-film/user/authorization/delete-user/${id}`);
         result = await result.json();
+        if (result.status == 200) {
+            setResponse(result.message)
+            setIsSuccess(true)
+        } else {
+            setResponse(result.message)
+            setIsSuccess(false)
+        }
         setRefresh(!refresh);
     }
     const handleToggleInput = (item) => {
@@ -168,6 +196,13 @@ const RenderUser = ({ listUser, refresh, setRefresh, userData }) => {
         }
         let result = await postMethod(data, "http://localhost:8080/Web-film/user/authorization/update-by-admin");
         result = await result.json();
+        if (result.status == 200) {
+            setResponse(result.message)
+            setIsSuccess(true)
+        } else {
+            setResponse(result.message)
+            setIsSuccess(false)
+        }
         setActionId("");
         setRefresh(!refresh);
     }

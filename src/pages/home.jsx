@@ -10,7 +10,7 @@ import ContentBanner from '../components/contentBanner';
 //https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
 
 function Home() {
-    const [movie, setMovie] = useState("");
+    const [movie, setMovie] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,10 +29,10 @@ function Home() {
             <ContentBanner src={'https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4'} title={"Bạch Nguyệt Phạn Tinh"} description={(movie.length != 0 && movie[0].length != 0 && movie[0][0].description) || ""}
                 item={movie[0]} />
             <div className='content-container'>
-                <ContentContainerSlider label={"Thịnh Hành"} array={movie[0] || []} />
-                <ContentContainerSlider label={"Phim Bộ"} array={movie[1] || []} />
-                <ContentContainerSlider label={"Phim Lẻ"} array={movie[2] || []} />
-                <ContentContainerSlider label={"Anime"} array={movie[3] || []} />
+                <ContentContainerSlider label={"Thịnh Hành"} array={(Array.isArray(movie[0])) ? movie[0] : []} />
+                <ContentContainerSlider label={"Phim Bộ"} array={(Array.isArray(movie[1])) ? movie[1] : []} />
+                <ContentContainerSlider label={"Phim Lẻ"} array={(Array.isArray(movie[2])) ? movie[2] : []} />
+                <ContentContainerSlider label={"Anime"} array={(Array.isArray(movie[3])) ? movie[3] : []} />
             </div>
         </div>
     )

@@ -11,6 +11,7 @@
 }
 
 .header-navbar {
+    margin-left: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -27,6 +28,7 @@
 }
 
 #header-ul>li {
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -81,4 +83,34 @@
 #find-icon {
     margin-right: -32px;
     z-index: 1;
+}
+
+#header-toggle-logo {
+    display: none;
+}
+
+@media screen and (max-width :1080px) {
+    .header-navbar {
+        margin-left: 0;
+        position: absolute;
+        padding: 0.5em 0;
+        width: 100%;
+        top: 3.4em;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 5px;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.767);
+    }
+
+    #header-toggle-logo {
+        display: block;
+    }
+}
+
+@media screen and (max-width:630px) {
+    #header-message {
+        display: none;
+    }
 }

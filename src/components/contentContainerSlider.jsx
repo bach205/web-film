@@ -4,7 +4,7 @@ import VideoBox from "./videoBox";
 function ContentContainerSlider({ label, array, episode = 1 }) {
 
     return (
-        <>
+        <div>
             <h2 style={{ color: "aqua" }}>{label}</h2>
             <div className='content-container-slider'>
                 {array.length != 0 && array.map((item) => {
@@ -16,7 +16,7 @@ function ContentContainerSlider({ label, array, episode = 1 }) {
                 )}
             </div>
 
-        </>
+        </div>
 
     )
 }

@@ -50,3 +50,19 @@
 #footer-line-down-container {
     padding: 30px 30px;
 }
+
+@media screen and (max-width:630px) {
+    #footer-line-up-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #footer-up-right-content {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #footer-up-right-content li {
+        text-align: center;
+    }
+}

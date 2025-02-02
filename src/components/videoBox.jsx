@@ -47,7 +47,7 @@ function VideoBox({ children, item, episode, label }) {
         addToWatchLater(item)
     }
     return (
-        <div className="video-box--container-parent" style={{ display: "flex", flexDirection: "column", gap: "0.5em", alignItems: "center", backgroundColor: isHover ? "darkgreen" : renderBackground() }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => { setIsHover(false) }}>
+        <div className="video-box-container-parent" style={{ display: "flex", flexDirection: "column", gap: "0.5em", alignItems: "center", backgroundColor: isHover ? "darkgreen" : renderBackground() }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => { setIsHover(false) }}>
             <div className="video-box-container">
                 <img src={item?.imageURL} />
                 <span className="video-box-container-after" onClick={() => handleOnClick(item)}>
@@ -59,7 +59,7 @@ function VideoBox({ children, item, episode, label }) {
 
             </div>
             <div style={{ marginTop: "5px" }}>{item?.title}</div>
-            <Button type="small-button" style={{ width: "9em", backgroundColor: "black", height: "4em", border: 0, marginBottom: "0.3em", fontSize: "12px" }} onClick={() => watchLaterClick(item)}>Watch Later</Button>
+            <div className="video-box-watch-later-button" title="watch later" onClick={() => watchLaterClick(item)}><i className="fa-solid fa-bookmark"></i></div>
         </div>
 
     )

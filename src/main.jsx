@@ -7,7 +7,7 @@ import { LoginProvider } from './context/loginProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <LoginProvider>
-    <BrowserRouter>
+    <BrowserRouter basename='/web-film'>
       <StrictMode>
         <AppRouter />
       </StrictMode>

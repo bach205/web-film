@@ -49,7 +49,35 @@ export const AdminManagement = () => {
 
 
 const UserTable = () => {
-    const [listUser, setListUser] = useState([]);
+    const [listUser, setListUser] = useState([
+        { id: 9, email: "admin@gmail.com", password: 1, firstName: "admin", lastName: "host", gender: 1, country: "vietnam", role: 1 },
+        { id: 22, email: "supachock@gmail.com", password: 1, firstName: "supachai", lastName: "chanathip", gender: 0, country: "thailand", role: 0 },
+        { id: 23, email: "bumathan@gmail.com", password: 1, firstName: "bumanthan", lastName: "therathon", gender: 0, country: "thailand", role: 0 },
+        { id: 42, email: "chanathip@gmail.com", password: 1, firstName: "chanathip", lastName: "songkraisin", gender: 0, country: "thailand", role: 0 },
+        { id: 43, email: "nguyenvana@gmail.com", password: 1, firstName: "Văn A", lastName: "Nguyễn", gender: 0, country: "Việt Nam", role: 0 },
+        { id: 44, email: "john.doe@gmail.com", password: 1, firstName: "John", lastName: "Doe", gender: 0, country: "USA", role: 0 },
+        { id: 45, email: "jane.smith@gmail.com", password: 1, firstName: "Jane", lastName: "Smith", gender: 1, country: "UK", role: 0 },
+        { id: 46, email: "alex.jones@gmail.com", password: 1, firstName: "Alex", lastName: "Jones", gender: 2, country: "Canada", role: 0 },
+        { id: 47, email: "michael.brown@gmail.com", password: 1, firstName: "Michael", lastName: "Brown", gender: 0, country: "Australia", role: 0 },
+        { id: 48, email: "sophia.white@gmail.com", password: 1, firstName: "Sophia", lastName: "White", gender: 1, country: "Germany", role: 0 },
+        { id: 49, email: "daniel.miller@gmail.com", password: 1, firstName: "Daniel", lastName: "Miller", gender: 2, country: "France", role: 0 },
+        { id: 50, email: "olivia.wilson@gmail.com", password: 1, firstName: "Olivia", lastName: "Wilson", gender: 0, country: "Italy", role: 0 },
+        { id: 51, email: "william.moore@gmail.com", password: 1, firstName: "William", lastName: "Moore", gender: 1, country: "Spain", role: 0 },
+        { id: 52, email: "emma.taylor@gmail.com", password: 1, firstName: "Emma", lastName: "Taylor", gender: 2, country: "Netherlands", role: 0 },
+        { id: 53, email: "james.anderson@gmail.com", password: 1, firstName: "James", lastName: "Anderson", gender: 0, country: "Sweden", role: 0 },
+        { id: 54, email: "lucas.clark@gmail.com", password: 1, firstName: "Lucas", lastName: "Clark", gender: 1, country: "Finland", role: 0 },
+        { id: 55, email: "mia.martin@gmail.com", password: 1, firstName: "Mia", lastName: "Martin", gender: 2, country: "Denmark", role: 0 },
+        { id: 56, email: "henry.jackson@gmail.com", password: 1, firstName: "Henry", lastName: "Jackson", gender: 0, country: "Norway", role: 0 },
+        { id: 57, email: "zoe.white@gmail.com", password: 1, firstName: "Zoe", lastName: "White", gender: 1, country: "Portugal", role: 0 },
+        { id: 58, email: "liam.harris@gmail.com", password: 1, firstName: "Liam", lastName: "Harris", gender: 2, country: "Belgium", role: 0 },
+        { id: 59, email: "chloe.lewis@gmail.com", password: 1, firstName: "Chloe", lastName: "Lewis", gender: 0, country: "Ireland", role: 0 },
+        { id: 60, email: "noah.young@gmail.com", password: 1, firstName: "Noah", lastName: "Young", gender: 1, country: "Switzerland", role: 0 },
+        { id: 61, email: "grace.king@gmail.com", password: 1, firstName: "Grace", lastName: "King", gender: 2, country: "Austria", role: 0 },
+        { id: 62, email: "ella.wright@gmail.com", password: 1, firstName: "Ella", lastName: "Wright", gender: 0, country: "Poland", role: 0 },
+        { id: 63, email: "jack.carter@gmail.com", password: 1, firstName: "Jack", lastName: "Carter", gender: 1, country: "Czech Republic", role: 0 }
+    ]
+
+    );
     const [listUserEachPage, setListUserEachPage] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState("");
@@ -66,14 +94,14 @@ const UserTable = () => {
     const [isCreate, setIsCreate] = useState(false)
     const [response, setResponse] = useState("");
     const [isSuccess, setIsSuccess] = useState(false);
-    useEffect(() => {
-        const fetchData = async () => {
-            let result = await getMethod("http://localhost:8080/Web-film/user/authorization/get-all");
-            result = await result.json();
-            setListUser(result.data)
-        }
-        fetchData()
-    }, [refresh])
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         let result = await getMethod("http://localhost:8080/Web-film/user/authorization/get-all");
+    //         result = await result.json();
+    //         setListUser(result.data)
+    //     }
+    //     fetchData()
+    // }, [refresh])
     const TOTAL_USER_EACH_PAGE = 15;
     const TOTAL_COLUMN = 5
     useEffect(() => {
@@ -101,18 +129,19 @@ const UserTable = () => {
                 email,
                 password
             }
-            console.log(data)
-            let result = await postMethod(data, "http://localhost:8080/Web-film/user/authorization/registration");
-            result = await result.json();
-            if (result.status == 200) {
-                setIsCreate(false);
-                setRefresh(!refresh);
-                setResponse(result.message);
-                setIsSuccess(true)
-            } else {
-                setResponse(result.message);
-                setIsSuccess(false);
-            }
+            setListUser([...listUser, data]);
+            // console.log(data)
+            // let result = await postMethod(data, "http://localhost:8080/Web-film/user/authorization/registration");
+            // result = await result.json();
+            // if (result.status == 200) {
+            setIsCreate(false);
+            setRefresh(!refresh);
+            setResponse(result.message);
+            setIsSuccess(true)
+            // } else {
+            //     setResponse(result.message);
+            //     setIsSuccess(false);
+            // }
         } else {
             setResponse("mat khau khong duoc rong")
             setIsSuccess(false);
@@ -166,16 +195,16 @@ const RenderUser = ({ listUser, refresh, setRefresh, userData, setResponse, setI
 
     const [actionId, setActionId] = useState("");
     const handleDelete = async (id) => {
-        let result = await postMethod({}, `http://localhost:8080/Web-film/user/authorization/delete-user/${id}`);
-        result = await result.json();
-        if (result.status == 200) {
-            setResponse(result.message)
-            setIsSuccess(true)
-        } else {
-            setResponse(result.message)
-            setIsSuccess(false)
-        }
-        setRefresh(!refresh);
+        // let result = await postMethod({}, `http://localhost:8080/Web-film/user/authorization/delete-user/${id}`);
+        // result = await result.json();
+        // if (result.status == 200) {
+        //     setResponse(result.message)
+        //     setIsSuccess(true)
+        // } else {
+        //     setResponse(result.message)
+        //     setIsSuccess(false)
+        // }
+        // setRefresh(!refresh);
     }
     const handleToggleInput = (item) => {
         setFirstName(item?.firstName)
@@ -186,25 +215,25 @@ const RenderUser = ({ listUser, refresh, setRefresh, userData, setResponse, setI
         setRole(item?.role);
     }
     const handleUpdate = async (item) => {
-        const data = {
-            id: item.id,
-            firstName,
-            lastName,
-            gender,
-            address,
-            role
-        }
-        let result = await postMethod(data, "http://localhost:8080/Web-film/user/authorization/update-by-admin");
-        result = await result.json();
-        if (result.status == 200) {
-            setResponse(result.message)
-            setIsSuccess(true)
-        } else {
-            setResponse(result.message)
-            setIsSuccess(false)
-        }
-        setActionId("");
-        setRefresh(!refresh);
+        // const data = {
+        //     id: item.id,
+        //     firstName,
+        //     lastName,
+        //     gender,
+        //     address,
+        //     role
+        // }
+        // let result = await postMethod(data, "http://localhost:8080/Web-film/user/authorization/update-by-admin");
+        // result = await result.json();
+        // if (result.status == 200) {
+        //     setResponse(result.message)
+        //     setIsSuccess(true)
+        // } else {
+        //     setResponse(result.message)
+        //     setIsSuccess(false)
+        // }
+        // setActionId("");
+        // setRefresh(!refresh);
     }
 
     return (

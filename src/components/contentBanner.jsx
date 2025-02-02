@@ -4,12 +4,14 @@ import { truncateString } from "../library/truncateString"
 import Button from "./form/button"
 import { postMethod } from "../library/API"
 import { LoginContext } from "../context/loginProvider"
+import { useNavigate } from "react-router"
 function ContentBanner({ src, title, description, item }) {
 
     const { userData } = useContext(LoginContext);
+    const navigate = useNavigate()
 
     const handleOnClick = (item) => {
-        window.location.href = `http://localhost:5173/watch/${item.id}/${item.title}/1`
+        navigate(`watch/${item.id}/${item.title}/1`);
     }
 
     const addToWatchLater = async (item) => {

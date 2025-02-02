@@ -81,7 +81,7 @@ const WatchLaterList = ({ movie, refresh, setRefresh, userData }) => {
     }
 
     const handleOnClick = (item) => {
-        window.location.href = `http://localhost:5173/watch/${item.id}/${item.title}/1`
+        navigate(`watch/${item.id}/${item.title}/1`)
     }
     return (
         <tr style={{ height: "2em" }}>

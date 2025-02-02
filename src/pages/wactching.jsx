@@ -9,44 +9,57 @@ import ContentContainerSlider from '../components/contentContainerSlider';
 
 function Watching() {
     const { movieId, title, episode } = useParams();
-    const [data, setData] = useState("");
+    const [data, setData] = useState(
+        {
+            "id": 1,
+            "title": "Bạch Nguyệt Phạn Tinh",
+            "description": "Chuyển thể từ tiểu thuyết Bạch Thước Thượng Thần Của tác giả Tinh Linh. Bạch Tuân Nguyên soái Tướng quân là đại thần quyền uy nhất Kinh thành, không kết giao bằng hữu, chỉ một lòng muốn răng long đầu bạc với Bạch phu nhân của mình. Sau 7 năm thành hôn họ mới sinh được một cặp song sinh. Trưởng nữ tên Bạch Hi, thứ nữ là Bạch Thước (Bạch Lộc)...",
+            "category": "Phim bộ",
+            "releaseDate": 2025,
+            "country": "Trung Quốc",
+            "imageURL": "https://static2.vieon.vn/vieplay-image/thumbnail_v4/2025/01/08/p2zkoubi_zr19ytn2_1920x1080-bachnguyenphantinh_296_168.webp",
+            "videoURL": "https://www.youtube.com/embed/MUPA1_9crhc?si=kfNEnLKvMYTC2dWU",
+            "view": 1000000
+        }
+    );
     const [isFetch, setIsFetch] = useState(false);
     const [trendingArray, setTrendingArray] = useState([]);
     const [relativeArray, setRelativeArray] = useState([]);
 
+    const navigate = useNavigate()
     const handleOnClick = (movieId, title, episode) => {
-        window.location.href = `http://localhost:5173/watch/${movieId}/${title}/${episode}`
+        navigate(`watch/${movieId}/${title}/${episode}`)
     }
 
-    const fetchData = async () => {
-        let result = await getMethod(`http://localhost:8080/Web-film/api/movies/get-episode-data/${title}/${episode}`);
-        result = await result.json();
-        if (result.status == 200) {
-            console.log(result)
-            setData(result.data);
-            setTrendingArray(result.listData[0]);
-            setRelativeArray(result.listData[1]);
-        }
+    // const fetchData = async () => {
+    //     let result = await getMethod(`http://localhost:8080/Web-film/api/movies/get-episode-data/${title}/${episode}`);
+    //     result = await result.json();
+    //     if (result.status == 200) {
+    //         console.log(result)
+    //         setData(result.data);
+    //         setTrendingArray(result.listData[0]);
+    //         setRelativeArray(result.listData[1]);
+    //     }
 
-    }
-    const updateView = async () => {
-        let body = {
-            movieId,
-            episode
-        }
-        let result = await postMethod(body, "http://localhost:8080/Web-film/api/movies/update-episode-view");
-        result = await result.json();
-    }
-    useEffect(() => {
-        fetchData();
-        setIsFetch(true);
-    }, [])
+    // }
+    // const updateView = async () => {
+    //     let body = {
+    //         movieId,
+    //         episode
+    //     }
+    //     let result = await postMethod(body, "http://localhost:8080/Web-film/api/movies/update-episode-view");
+    //     result = await result.json();
+    // }
+    // useEffect(() => {
+    //     fetchData();
+    //     setIsFetch(true);
+    // }, [])
 
-    useEffect(() => {
-        if (isFetch) {
-            updateView();
-        }
-    }, [isFetch])
+    // useEffect(() => {
+    //     if (isFetch) {
+    //         updateView();
+    //     }
+    // }, [isFetch])
     return (
         <div className='margin-header'>
             <div style={{ display: "flex", flexDirection: "column" }}>

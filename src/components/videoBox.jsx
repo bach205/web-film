@@ -3,6 +3,7 @@ import "../css/videoBox.css"
 import { postMethod } from "../library/API"
 import Button from "./form/button"
 import { LoginContext } from "../context/loginProvider"
+import { useNavigate } from "react-router"
 function VideoBox({ children, item, episode, label }) {
 
     const { userData } = useContext(LoginContext);
@@ -25,22 +26,24 @@ function VideoBox({ children, item, episode, label }) {
         }
     }
 
+    const navigate = useNavigate()
     const handleOnClick = (item) => {
-        window.location.href = `http://localhost:5173/watch/${item.id}/${item.title}/${episode}`
+        navigate(`watch/${item.id}/${item.title}/${episode}`)
     }
 
     const addToWatchLater = async (item) => {
-        if (userData) {
-            let data = {
-                userId: userData?.id,
-                movieId: item.id
-            }
-            let result = await postMethod(data, "http://localhost:8080/Web-film/api/movies/add-to-watchlater");
-            result = await result.json();
-            alert(result.message);
-        } else {
-            alert("you need login to use this feature");
-        }
+        // if (userData) {
+        //     let data = {
+        //         userId: userData?.id,
+        //         movieId: item.id
+        //     }
+        //     let result = await postMethod(data, "http://localhost:8080/Web-film/api/movies/add-to-watchlater");
+        //     result = await result.json();
+        //     alert(result.message);
+        // } else {
+        //     alert("you need login to use this feature");
+        // }
+        alert("chua deploy backend")
     }
 
     const watchLaterClick = (item) => {

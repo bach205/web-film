@@ -23,12 +23,13 @@ body {
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #e4ac10;
   text-decoration: inherit;
+  cursor: pointer;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #268283;
 }
 
 h1 {
@@ -99,5 +100,11 @@ ul {
 
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media screen and (max-width:577px) {
+  .margin-header {
+    margin: 7.5em 0;
   }
 }

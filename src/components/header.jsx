@@ -51,7 +51,6 @@ function Header() {
             </ul>
 
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                <span id="find-icon"><i className="fa-solid fa-magnifying-glass"></i></span>
                 <Input type={"text"} placeholder={"Tìm kiếm"} className="medium-input" onKeyDown={onEnterDown} value={titleSearch} onChange={(event) => { setTitleSearch(event.target.value) }} />
             </div>
 

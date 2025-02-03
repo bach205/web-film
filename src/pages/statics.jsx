@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMethod } from "../library/API"
 import VideoBox from "../components/videoBox";
+import styles from "../css/statics.module.css"
 
 
 function Statics() {
@@ -22,17 +23,17 @@ function Statics() {
     useEffect(() => {
         fetchData();
     }, [])
-
-    console.log(mostView)
     return (
         <div className='margin-header'>
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                <TopStatic movie={mostView} label={"The Most View"} />
-                <div>
-                    <h2><span style={{ color: "aqua" }}>Total Movie: </span>{totalMovie}<span style={{ color: "gray" }}> Movies</span></h2>
-                    <h2><span style={{ color: "aqua" }}>Total View: </span>{totalView}<span style={{ color: "gray" }}> Views</span></h2>
+            <div className={styles.wrapper}>
+                <div className={styles.container}>
+                    <TopStatic movie={mostView} label={"The Most View"} />
+                    <div>
+                        <h2><span style={{ color: "aqua" }}>Total Movie: </span>{totalMovie}<span style={{ color: "gray" }}> Movies</span></h2>
+                        <h2><span style={{ color: "aqua" }}>Total View: </span>{totalView}<span style={{ color: "gray" }}> Views</span></h2>
+                    </div>
+                    <TopStatic movie={leastView} label={"The Least View"} />
                 </div>
-                <TopStatic movie={leastView} label={"The Least View"} />
             </div>
         </div>
     )
@@ -41,7 +42,7 @@ function Statics() {
 const TopStatic = ({ movie, label }) => {
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
-            <h3 style={{ color: "aqua", textAlign: "center" }}>{label}</h3>
+            <h3 className={styles.label}>{label}</h3>
             {movie && movie.map((movie) => {
                 return (
                     <div key={movie.movieId} style={{ display: "inline-flex", flexDirection: "row", gap: "10px", border: "solid 2px gray", width: "29em" }}>
@@ -50,7 +51,6 @@ const TopStatic = ({ movie, label }) => {
                             <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>Title: </span>{movie.title}</p>
                             <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>View: </span>{movie.view}</p>
                             <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>View per episode: </span>{movie.totalEpisode}</p>
-                            <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>Total episode: </span>{Math.floor(movie.view / movie.totalEpisode)}</p>
                         </div>
                     </div>
                 )

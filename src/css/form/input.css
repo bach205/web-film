@@ -46,3 +46,9 @@
         width: 150px;
     }
 }
+
+@media screen and (max-width:230px) {
+    .medium-input {
+        width: 50px;
+    }
+}

@@ -36,7 +36,6 @@
     display: flex;
     flex-direction: row;
     gap: 100px;
-    padding-right: 50px;
 }
 
 #footer-line-down-container p {
@@ -49,6 +48,10 @@
 
 #footer-line-down-container {
     padding: 30px 30px;
+}
+
+#footer-line-down-container p {
+    word-wrap: break-word;
 }
 
 @media screen and (max-width:630px) {

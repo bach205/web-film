@@ -144,18 +144,22 @@ function Search() {
         <div className='margin-header'>
             <div className={styles.wrapper}>
 
-                <div className={styles.dropDown} style={{ alignItems: "center" }}>
+                <div className={styles.dropDownLeft} style={{ alignItems: "center" }}>
                     <Button style={{ width: "6em" }} onClick={searchMovie}>search</Button>
                     <div className='flex-row' style={{ position: "relative" }}>
                         <Input type={"text"} placeholder={"Tìm kiếm"} value={title} className="medium-input" onChange={(event) => handleOnChange(event, setTitle)} onKeyDown={e => HandleOnEnterDown(e)} />
                     </div>
                     <DropDown value={arrange} style={{ width: "12em" }} array={arrangeArray} onChange={(event) => handleOnChange(event, setArrange)} />
                 </div>
-                <div className={styles.dropDown}>
-                    <DropDown value={genre} style={{ width: "12em" }} array={genreArray} onChange={(event) => handleOnChange(event, setGenre)} />
-                    <DropDown value={country} style={{ width: "12em" }} array={countryArray} onChange={(event) => handleOnChange(event, setCountry)} />
-                    <DropDown value={releaseDate} style={{ width: "12em" }} array={releaseDateArray} onChange={(event) => handleOnChange(event, setReleaseDate)} />
-                    <DropDown value={category} style={{ width: "12em" }} array={categoryArray} onChange={(event) => handleOnChange(event, setCategory)} />
+                <div className={styles.dropDownRight}>
+                    <div className={styles.dropDownChild}>
+                        <DropDown value={genre} style={{ width: "12em" }} array={genreArray} onChange={(event) => handleOnChange(event, setGenre)} />
+                        <DropDown value={country} style={{ width: "12em" }} array={countryArray} onChange={(event) => handleOnChange(event, setCountry)} />
+                    </div>
+                    <div className={styles.dropDownChild}>
+                        <DropDown value={releaseDate} style={{ width: "12em" }} array={releaseDateArray} onChange={(event) => handleOnChange(event, setReleaseDate)} />
+                        <DropDown value={category} style={{ width: "12em" }} array={categoryArray} onChange={(event) => handleOnChange(event, setCategory)} />
+                    </div>
                 </div>
             </div>
             <h2 style={{ color: "aqua" }}>Danh sách phim đã được lọc</h2>

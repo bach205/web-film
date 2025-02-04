@@ -6,7 +6,21 @@
     gap: 10px;
 }
 
-.dropDown {
+.dropDownChild {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+}
+
+.dropDownLeft {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 1em 0;
+}
+
+.dropDownRight {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -18,7 +32,21 @@
         flex-direction: column;
     }
 
-    .dropDown {
+
+
+    .dropDownChild {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .dropDownLeft {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:380px) {
+    .dropDownRight {
         flex-direction: column;
     }
 }

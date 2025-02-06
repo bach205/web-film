@@ -1,8 +1,7 @@
 import { useContext, useState } from "react"
+import { LoginContext } from "../context/loginProvider"
 import "../css/videoBox.css"
 import { postMethod } from "../library/API"
-import Button from "./form/button"
-import { LoginContext } from "../context/loginProvider"
 function VideoBox({ children, item, episode, label }) {
 
     const { userData } = useContext(LoginContext);
@@ -47,19 +46,22 @@ function VideoBox({ children, item, episode, label }) {
         addToWatchLater(item)
     }
     return (
-        <div className="video-box--container-parent" style={{ display: "flex", flexDirection: "column", gap: "0.5em", alignItems: "center", backgroundColor: isHover ? "darkgreen" : renderBackground() }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => { setIsHover(false) }}>
+        <div className="video-box-container-parent" style={{ display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: isHover ? "aqua" : "gray" }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => { setIsHover(false) }}>
             <div className="video-box-container">
                 <img src={item?.imageURL} />
                 <span className="video-box-container-after" onClick={() => handleOnClick(item)}>
                     <span id="thumnail-description">{item?.description}</span>
                     <br />
-                    <span>{item?.category + " | " + item?.country + " | " + item?.releaseDate}</span>
+                    <span style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "3px" }}>
+                        <span >{item?.category + " | " + item?.country + " | " + item?.releaseDate}</span>
+                        <span className="video-box-watch-later-button" title="watch later" onClick={() => watchLaterClick(item)}><i className="fa-solid fa-bookmark"></i></span>
+                    </span>
                 </span>
                 {children}
 
             </div>
-            <div style={{ marginTop: "5px" }}>{item?.title}</div>
-            <Button type="small-button" style={{ width: "9em", backgroundColor: "black", height: "4em", border: 0, marginBottom: "0.3em", fontSize: "12px" }} onClick={() => watchLaterClick(item)}>Watch Later</Button>
+            <div style={{ marginTop: "5px", color: "black" }}>{item?.title}</div>
+
         </div>
 
     )

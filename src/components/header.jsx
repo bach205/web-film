@@ -31,11 +31,19 @@ function Header() {
         }
     }
 
+    const [toggleNavbar, setToggleNavbar] = useState(false);
+
     let checkUser = userData?.role === 1 || userData?.role === 2
     return (
         <div className="header-container">
-            <ul className="header-navbar " id="header-ul">
-                <li onClick={() => { handleNavigate("/") }}><img src={logoNoBackground} alt="" width="80px" height="100%"></img></li>
+            <img id="header-toggle-logo" onClick={() => { setToggleNavbar(!toggleNavbar) }} src={logoNoBackground} alt="" width="80px" height="100%" />
+            <ul className="header-navbar" style={{ display: toggleNavbar ? "flex" : "none" }} id="header-ul">
+                <li onClick={() => { handleNavigate("/") }}><i className="fa-solid fa-house"></i>Trang chủ</li>
+                <li onClick={() => { window.location.href = `http://localhost:5173/search?category=Phim%20Bộ` }}><i className="fa-solid fa-video"></i>Phim bộ</li>
+                <li onClick={() => { window.location.href = `http://localhost:5173/search?category=Phim%20Lẻ` }}><i className="fa-solid fa-film"></i>Phim lẻ</li>
+                <li onClick={() => { window.location.href = `http://localhost:5173/search?genre=Anime` }}><i className="fa-solid fa-dragon"></i>Anime</li>
+            </ul>
+            <ul className="header-navbar" id="header-ul">
                 <li onClick={() => { handleNavigate("/") }}><i className="fa-solid fa-house"></i>Trang chủ</li>
                 <li onClick={() => { window.location.href = `http://localhost:5173/search?category=Phim%20Bộ` }}><i className="fa-solid fa-video"></i>Phim bộ</li>
                 <li onClick={() => { window.location.href = `http://localhost:5173/search?category=Phim%20Lẻ` }}><i className="fa-solid fa-film"></i>Phim lẻ</li>
@@ -43,7 +51,6 @@ function Header() {
             </ul>
 
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                <span id="find-icon"><i className="fa-solid fa-magnifying-glass"></i></span>
                 <Input type={"text"} placeholder={"Tìm kiếm"} className="medium-input" onKeyDown={onEnterDown} value={titleSearch} onChange={(event) => { setTitleSearch(event.target.value) }} />
             </div>
 
@@ -56,7 +63,7 @@ function Header() {
                     </div>)
                     :
                     (<div className="header-right-content">
-                        <p>{"Hello " + userData?.firstName}</p>
+                        <p id="header-message">{"Hello " + userData?.firstName}</p>
                         <div style={{ display: "flex", flexDirection: "column" }}>
                             <button className="circle" onClick={() => {
                                 setIsOpenUserList(!isOpenUserList);

@@ -6,6 +6,7 @@ import Input from '../components/form/input';
 import { getMethod } from '../library/API';
 import ContentContainerSlider from '../components/contentContainerSlider';
 import { Pagination } from '../components/pagination';
+import styles from "../css/search.module.css"
 
 //https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4
 //https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
@@ -141,18 +142,25 @@ function Search() {
 
     return (
         <div className='margin-header'>
-            <div style={{ display: "flex", flexDirection: "row", gap: "10px", alignItems: "center", justifyContent: "space-evenly" }}>
+            <div className={styles.wrapper}>
 
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                    <span id="find-icon"><i className="fa-solid fa-magnifying-glass"></i></span>
-                    <Input type={"text"} placeholder={"Tìm kiếm"} value={title} className="medium-input" onChange={(event) => handleOnChange(event, setTitle)} onKeyDown={e => HandleOnEnterDown(e)} />
+                <div className={styles.dropDownLeft} style={{ alignItems: "center" }}>
+                    <Button style={{ width: "6em" }} onClick={searchMovie}>search</Button>
+                    <div className='flex-row' style={{ position: "relative" }}>
+                        <Input type={"text"} placeholder={"Tìm kiếm"} value={title} className="medium-input" onChange={(event) => handleOnChange(event, setTitle)} onKeyDown={e => HandleOnEnterDown(e)} />
+                    </div>
+                    <DropDown value={arrange} style={{ width: "12em" }} array={arrangeArray} onChange={(event) => handleOnChange(event, setArrange)} />
                 </div>
-                <DropDown value={genre} style={{ width: "12em" }} array={genreArray} onChange={(event) => handleOnChange(event, setGenre)} />
-                <DropDown value={country} style={{ width: "12em" }} array={countryArray} onChange={(event) => handleOnChange(event, setCountry)} />
-                <DropDown value={releaseDate} style={{ width: "12em" }} array={releaseDateArray} onChange={(event) => handleOnChange(event, setReleaseDate)} />
-                <DropDown value={category} style={{ width: "12em" }} array={categoryArray} onChange={(event) => handleOnChange(event, setCategory)} />
-                <DropDown value={arrange} style={{ width: "12em" }} array={arrangeArray} onChange={(event) => handleOnChange(event, setArrange)} />
-                <Button style={{ width: "6em" }} onClick={searchMovie}>search</Button>
+                <div className={styles.dropDownRight}>
+                    <div className={styles.dropDownChild}>
+                        <DropDown value={genre} style={{ width: "12em" }} array={genreArray} onChange={(event) => handleOnChange(event, setGenre)} />
+                        <DropDown value={country} style={{ width: "12em" }} array={countryArray} onChange={(event) => handleOnChange(event, setCountry)} />
+                    </div>
+                    <div className={styles.dropDownChild}>
+                        <DropDown value={releaseDate} style={{ width: "12em" }} array={releaseDateArray} onChange={(event) => handleOnChange(event, setReleaseDate)} />
+                        <DropDown value={category} style={{ width: "12em" }} array={categoryArray} onChange={(event) => handleOnChange(event, setCategory)} />
+                    </div>
+                </div>
             </div>
             <h2 style={{ color: "aqua" }}>Danh sách phim đã được lọc</h2>
 

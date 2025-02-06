@@ -166,4 +166,9 @@
     text-transform: uppercase;
     margin-bottom: 5px !important;
     animation: popup 0.3s ease-in-out;
+@media screen and (max-width:400px) {
+    .small-button {
+        width: 50px;
+        font-size: 8px;
+    }
 }

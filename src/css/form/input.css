@@ -55,3 +55,14 @@
 .new-input::placeholder {
     color: #fff;
 }
+@media screen and (max-width:400px) {
+    .medium-input {
+        width: 150px;
+    }
+}
+
+@media screen and (max-width:230px) {
+    .medium-input {
+        width: 50px;
+    }
+}

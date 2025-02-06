@@ -1,9 +1,9 @@
 import "../css/wrapperBox.css"
 
-function WrapperBox({ children, style }) {
+function WrapperBox({ children, className, style }) {
 
     return (
-        <div className="wrapper" style={style}>
+        <div className={`wrapper ${className}`} style={style}>
             <div className="wrapper-box">
                 {children}
             </div>

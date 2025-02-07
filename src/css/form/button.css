@@ -125,7 +125,7 @@
     color: #fff;
     text-transform: uppercase;
     font-size: 1.1em;
-    
+
     background: rgb(72, 88, 209);
     background: linear-gradient(60deg, #063F92 0%, #1ACCF0 50%, #66FECB 100%);
     transition: all 0.2s ease;
@@ -166,6 +166,8 @@
     text-transform: uppercase;
     margin-bottom: 5px !important;
     animation: popup 0.3s ease-in-out;
+}
+
 @media screen and (max-width:400px) {
     .small-button {
         width: 50px;

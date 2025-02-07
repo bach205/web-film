@@ -3,7 +3,7 @@ import { LoginContext } from "../context/loginProvider"
 import "../css/videoBox.css"
 import { postMethod } from "../library/API"
 import { useNavigate } from "react-router"
-function VideoBox({ children, item, episode, label }) {
+function VideoBox({ children, item, episode }) {
 
     const { userData } = useContext(LoginContext);
     const [isHover, setIsHover] = useState(false)

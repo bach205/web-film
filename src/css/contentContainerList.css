@@ -12,6 +12,7 @@
 .content-container-label {
     justify-content: space-between;
     margin: 0 0;
+    justify-content: center;
 }
 
 .content-container-label a {

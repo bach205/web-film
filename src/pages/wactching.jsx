@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import styles from "../css/watching.module.css"
 import { getMethod, postMethod } from '../library/API';
-import ContentContainerSlider from '../components/contentContainerSlider';
+import ContentContainerList from '../components/contentContainerList';
 
 //https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4
 //https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
@@ -91,8 +91,8 @@ function Watching() {
                         })}
                     </div>
                 </div>
-                {trendingArray && <ContentContainerSlider label={"Phim Đề Cử"} array={trendingArray} episode={1} />}
-                {relativeArray.length != 0 && <ContentContainerSlider label={"Phim Cùng Thể Loại"} array={relativeArray} episode={1} />}
+                {trendingArray && <ContentContainerList label={"Phim Đề Cử"} array={trendingArray} episode={1} />}
+                {relativeArray.length != 0 && <ContentContainerList label={"Phim Cùng Thể Loại"} array={relativeArray} episode={1} />}
             </div>
         </div>
     )

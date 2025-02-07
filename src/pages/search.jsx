@@ -4,7 +4,7 @@ import Button from '../components/form/button';
 import { DropDown } from '../components/form/dropdown';
 import Input from '../components/form/input';
 import { getMethod } from '../library/API';
-import ContentContainerSlider from '../components/contentContainerSlider';
+import ContentContainerList from '../components/contentContainerList';
 import { Pagination } from '../components/pagination';
 import styles from "../css/search.module.css"
 
@@ -166,7 +166,7 @@ function Search() {
 
             {listMovie.length != 0 && (
                 <>
-                    <ContentContainerSlider array={listMovieEachPage} episode={1} />
+                    <ContentContainerList array={listMovieEachPage} episode={1} />
                     <Pagination totalPage={totalPage} page={page} setPage={setPage} totalColumn={TOTAL_COLUMN} />
                 </>
             )}

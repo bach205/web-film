@@ -7,22 +7,6 @@ function VideoBox({ children, item, episode, label }) {
     const { userData } = useContext(LoginContext);
     const [isHover, setIsHover] = useState(false)
 
-    const renderBackground = () => {
-        switch (label) {
-            case "Thịnh Hành": {
-                return "crimson"
-            }
-            case "Phim Bộ": {
-                return "teal"
-            }
-            case "Phim Lẻ": {
-                return "darkgoldenrod"
-            }
-            default: {
-                return "gray"
-            }
-        }
-    }
 
     const handleOnClick = (item) => {
         window.location.href = `http://localhost:5173/watch/${item.id}/${item.title}/${episode}`
@@ -46,7 +30,7 @@ function VideoBox({ children, item, episode, label }) {
         addToWatchLater(item)
     }
     return (
-        <div className="video-box-container-parent" style={{ display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: isHover ? "aqua" : "gray" }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => { setIsHover(false) }}>
+        <div className="video-box-container-parent" style={{ display: "flex", flexDirection: "column", alignItems: "center" }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => { setIsHover(false) }}>
             <div className="video-box-container">
                 <img src={item?.imageURL} />
                 <span className="video-box-container-after" onClick={() => handleOnClick(item)}>
@@ -54,14 +38,17 @@ function VideoBox({ children, item, episode, label }) {
                     <br />
                     <span style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "3px" }}>
                         <span >{item?.category + " | " + item?.country + " | " + item?.releaseDate}</span>
-                        <span className="video-box-watch-later-button" title="watch later" onClick={() => watchLaterClick(item)}><i className="fa-solid fa-bookmark"></i></span>
+
                     </span>
                 </span>
                 {children}
 
             </div>
-            <div style={{ marginTop: "5px", color: "black" }}>{item?.title}</div>
+            <div style={{ display: "flex", gap: "2px", flexDirection: "row", alignItems: "center" }}>
+                <span style={{ marginTop: "5px" }} className="video-box-title">{item?.title}</span>
+                <span style={{ alignSelf: "flex-end" }} className="video-box-watch-later-button" title="watch later" onClick={() => watchLaterClick(item)}><i className="fa-solid fa-bookmark"></i></span>
 
+            </div>
         </div>
 
     )

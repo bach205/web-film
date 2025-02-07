@@ -1,30 +1,13 @@
 import { useContext, useState } from "react"
+import { LoginContext } from "../context/loginProvider"
 import "../css/videoBox.css"
 import { postMethod } from "../library/API"
-import Button from "./form/button"
-import { LoginContext } from "../context/loginProvider"
 import { useNavigate } from "react-router"
 function VideoBox({ children, item, episode, label }) {
 
     const { userData } = useContext(LoginContext);
     const [isHover, setIsHover] = useState(false)
 
-    const renderBackground = () => {
-        switch (label) {
-            case "Thịnh Hành": {
-                return "crimson"
-            }
-            case "Phim Bộ": {
-                return "teal"
-            }
-            case "Phim Lẻ": {
-                return "darkgoldenrod"
-            }
-            default: {
-                return "gray"
-            }
-        }
-    }
 
     const navigate = useNavigate()
     const handleOnClick = (item) => {
@@ -50,19 +33,25 @@ function VideoBox({ children, item, episode, label }) {
         addToWatchLater(item)
     }
     return (
-        <div className="video-box--container-parent" style={{ display: "flex", flexDirection: "column", gap: "0.5em", alignItems: "center", backgroundColor: isHover ? "darkgreen" : renderBackground() }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => { setIsHover(false) }}>
+        <div className="video-box-container-parent" style={{ display: "flex", flexDirection: "column", alignItems: "center" }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => { setIsHover(false) }}>
             <div className="video-box-container">
                 <img src={item?.imageURL} />
                 <span className="video-box-container-after" onClick={() => handleOnClick(item)}>
                     <span id="thumnail-description">{item?.description}</span>
                     <br />
-                    <span>{item?.category + " | " + item?.country + " | " + item?.releaseDate}</span>
+                    <span style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "3px" }}>
+                        <span >{item?.category + " | " + item?.country + " | " + item?.releaseDate}</span>
+
+                    </span>
                 </span>
                 {children}
 
             </div>
-            <div style={{ marginTop: "5px" }}>{item?.title}</div>
-            <Button type="small-button" style={{ width: "9em", backgroundColor: "black", height: "4em", border: 0, marginBottom: "0.3em", fontSize: "12px" }} onClick={() => watchLaterClick(item)}>Watch Later</Button>
+            <div style={{ display: "flex", gap: "2px", flexDirection: "row", alignItems: "center" }}>
+                <span style={{ marginTop: "5px" }} className="video-box-title">{item?.title}</span>
+                <span style={{ alignSelf: "flex-end" }} className="video-box-watch-later-button" title="watch later" onClick={() => watchLaterClick(item)}><i className="fa-solid fa-bookmark"></i></span>
+
+            </div>
         </div>
 
     )

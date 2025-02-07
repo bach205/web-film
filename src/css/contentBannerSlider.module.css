@@ -1,0 +1,54 @@
+.container {
+    position: relative;
+    top: -10em;
+
+}
+
+.containerSlider {
+    position: relative;
+    height: 152.45px;
+}
+
+.videoContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 152.45px;
+    transition: all 1s ease, opacity 0.1s ease;
+}
+
+.button {
+    position: absolute;
+    z-index: 1;
+    padding: 10px 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: aqua;
+    cursor: pointer;
+    transition: background-color 1s ease;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 25px;
+}
+
+.button:hover {
+    background-color: aqua;
+    color: black;
+}
+
+
+.before {
+    left: 0;
+}
+
+.after {
+    right: 0;
+}
+
+.left_slide {
+    transform: translateX(-100%);
+}
+
+.right_slide {
+    transform: translateX(100%);
+}

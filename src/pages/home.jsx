@@ -3,8 +3,9 @@ import { LoginContext } from '../context/loginProvider'
 import "../css/home.css"
 import "../css/home.css"
 import { getMethod, postMethod } from '../library/API';
-import ContentContainerSlider from '../components/contentContainerSlider';
+import ContentContainerList from '../components/contentContainerList';
 import ContentBanner from '../components/contentBanner';
+import ContentContainerSlider from '../components/contentBannerSlider';
 
 //https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4
 //https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
@@ -97,9 +98,9 @@ function Home() {
                 item={movie[0]} />
             <div className='content-container'>
                 <ContentContainerSlider label={"Thịnh Hành"} array={movie} />
-                <ContentContainerSlider label={"Phim Bộ"} array={movie} />
-                <ContentContainerSlider label={"Phim Lẻ"} array={movie} />
-                <ContentContainerSlider label={"Anime"} array={movie} />
+                <ContentContainerList label={"Phim Bộ"} array={movie} />
+                <ContentContainerList label={"Phim Lẻ"} array={movie} />
+                <ContentContainerList label={"Anime"} array={movie} />
             </div>
         </div>
     )

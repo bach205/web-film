@@ -38,8 +38,8 @@ function ContentBanner({ src, title, description, item }) {
             <video src={src} autoPlay muted loop>
             </video>
             <div className='list-container'>
-                <h1 style={{ marginTop: "0", marginBottom: "20px" }}>{title}</h1>
-                <p>{description}</p>
+                <h1 id="banner-info" style={{ marginTop: "0", marginBottom: "20px" }}>{title}</h1>
+                <p id="banner-info">{description}</p>
                 <div className='button-list'>
                     <Button type='watch-now-button' onClick={() => handleOnClick(item)} >
                         xem ngay

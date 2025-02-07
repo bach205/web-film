@@ -1,0 +1,52 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+}
+
+.dropDownChild {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+}
+
+.dropDownLeft {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 1em 0;
+}
+
+.dropDownRight {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 1em 0;
+}
+
+@media screen and (max-width:1415px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+
+
+    .dropDownChild {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .dropDownLeft {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:380px) {
+    .dropDownRight {
+        flex-direction: column;
+    }
+}

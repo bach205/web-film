@@ -24,6 +24,7 @@
     padding: 10px 15px;
     color: aqua;
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.727);
     top: 50%;
     transform: translateY(-50%);
     font-size: 25px;
@@ -31,6 +32,7 @@
 
 .button:hover {
     color: black;
+    background-color: aqua;
 }
 
 

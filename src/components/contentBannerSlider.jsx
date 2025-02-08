@@ -18,7 +18,7 @@ function ContentContainerSlider({ label, array, episode = 1 }) {
             <div>
                 <h2 style={{ color: "aqua", textAlign: "center" }}>{label}</h2>
             </div>
-            <div className={styles.containerSlider} style={{ alignItems: "center", overflow: "hidden", width: "100%" }}>
+            <div className={styles.containerSlider} style={{ alignItems: "center", width: "100%" }}>
                 <ButtonPrevious page={page} setIsLeftSlide={setIsLeftSlide} setPage={setPage} />
                 <Frame array={resource} page={page} isLeftSlide={isLeftSlide} />
                 <ButtonNext page={page} setIsLeftSlide={setIsLeftSlide} setPage={setPage} />

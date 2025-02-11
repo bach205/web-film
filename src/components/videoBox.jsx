@@ -11,7 +11,7 @@ function VideoBox({ children, item, episode }) {
 
     const navigate = useNavigate()
     const handleOnClick = (item) => {
-        navigate(`watch/${item.id}/${item.title}/${episode}`)
+        navigate(`http://localhost:5173/watch/${item?.id ? item.id : item.movieId}/${item.title}/${episode}`)
     }
 
     const addToWatchLater = async (item) => {
@@ -50,15 +50,19 @@ function VideoBox({ children, item, episode }) {
                 </div>
                 <div style={{ display: "flex", gap: "2px", flexDirection: "row", alignItems: "center" }}>
                     <span style={{ marginTop: "5px" }} className="video-box-title">{item?.title}</span>
+                </div>
+                <div className="flex-row">
+                    <span className="video-box-title">Rate: 5<i className="fa-solid fa-star" style={{ color: "yellow" }}></i></span>
                     <span style={{ alignSelf: "flex-end" }} className="video-box-watch-later-button" title="watch later" onClick={() => watchLaterClick(item)}><i className="fa-solid fa-bookmark"></i></span>
                 </div>
+                {userData?.role == 1 && (
+                    <div className="flex-row" style={{ justifyContent: "space-evenly", margin: "0 0" }}>
+                        <button className="video-box-btn video-box-btn-update">update</button>
+                        <button className="video-box-btn video-box-btn-delete">delete</button>
+                    </div>
+                )}
             </div>
-            {userData?.role == 1 && (
-                <div className="flex-row" style={{ justifyContent: "space-evenly", margin: "0 0" }}>
-                    <button className="video-box-btn video-box-btn-update">update</button>
-                    <button className="video-box-btn video-box-btn-delete">delete</button>
-                </div>
-            )}
+
         </div>
 
     )

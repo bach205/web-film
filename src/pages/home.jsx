@@ -1,11 +1,12 @@
-import { useContext, useEffect, useState } from 'react'
-import { LoginContext } from '../context/loginProvider'
-import "../css/home.css"
-import "../css/home.css"
-import { getMethod, postMethod } from '../library/API';
+import { useEffect, useState } from 'react';
+import bleach from "../assets/bleach.jpg";
+import natra from "../assets/na_tra.jpg";
+import peaky from "../assets/peaky_blinder.jpg";
 import ContentContainerList from '../components/ContentContainerList';
 import ContentBanner from '../components/contentBanner';
 import ContentContainerSlider from '../components/contentBannerSlider';
+import "../css/home.css";
+import { getMethod } from '../library/API';
 
 //https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4
 //https://trailer.vieon.vn/Teaser_NgoaiGiaHoiXuan_mkt.mp4
@@ -31,8 +32,11 @@ function Home() {
                 item={movie[0]} />
             <div className='content-container'>
                 <ContentContainerSlider label={"Thịnh Hành"} array={(Array.isArray(movie[0])) ? movie[0] : []} />
+                <img src={peaky} alt='theme' title='theme' width={"100%"} height={"220px"} style={{ margin: "30px 0" }} />
                 <ContentContainerList label={"Phim Bộ"} array={(Array.isArray(movie[1])) ? movie[1] : []} />
+                <img src={natra} alt='theme' title='theme' width={"100%"} height={"220px"} style={{ margin: "30px 0" }} />
                 <ContentContainerList label={"Phim Lẻ"} array={(Array.isArray(movie[2])) ? movie[2] : []} />
+                <img src={bleach} alt='theme' title='theme' width={"100%"} height={"220px"} style={{ margin: "30px 0" }} />
                 <ContentContainerList label={"Anime"} array={(Array.isArray(movie[3])) ? movie[3] : []} />
             </div>
         </div>

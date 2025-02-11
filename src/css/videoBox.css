@@ -13,6 +13,7 @@
 }
 
 .video-box-title {
+    font-size: 12px;
     color: aqua;
 }
 
@@ -64,6 +65,7 @@
 }
 
 .video-box-watch-later-button {
+    color: gray;
     cursor: pointer;
     font-size: 15px;
 }

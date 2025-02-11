@@ -55,6 +55,9 @@ function Watching() {
                 <p style={{ marginTop: "0" }}>
                     <span className={styles.secondary}>View: </span>{data?.view}
                 </p>
+                <div>
+                    <RatingStar />
+                </div>
                 <div style={{ display: "flex", flexDirection: "row", gap: "2em" }}>
                     <img src={data?.imageURL} style={{ borderRadius: "10px" }} />
                     <p style={{ display: "inline-block" }}>{data?.description}</p>
@@ -95,6 +98,32 @@ function Watching() {
                 {relativeArray.length != 0 && <ContentContainerList label={"Phim Cùng Thể Loại"} array={relativeArray} episode={1} />}
             </div>
         </div>
+    )
+}
+
+const RatingStar = () => {
+    const arr = new Array(5).fill(0);
+    const [star, setStar] = useState([false, false, false, false, false]);
+
+    const handleHoverStar = (index) => {
+        let tmp = [...star];
+        for (let i = 0; i <= index; i++) {
+            tmp[i] = true;
+        }
+        setStar([...tmp])
+    }
+    const handleLeaveStar = () => {
+        setStar([false, false, false, false, false]);
+    }
+
+    return (
+        <p>
+            {arr.map((_, index) => {
+                return (
+                    <span span key={index} style={{ color: star[index] && "yellow" }}> <i onMouseEnter={() => handleHoverStar(index)} onMouseLeave={handleLeaveStar} className="fa-solid fa-star" ></i></span>
+                )
+            })}
+        </p >
     )
 }
 

@@ -132,7 +132,6 @@ function Search() {
     useEffect(() => {
         searchMovie();
     }, [])
-    console.log(listMovie)
     const TOTAL_VIDEO_PER_PAGE = 30;
     const TOTAL_COLUMN = 5
     useEffect(() => {

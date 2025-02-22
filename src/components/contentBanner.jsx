@@ -5,9 +5,7 @@ import Button from "./form/button"
 import { postMethod } from "../library/API"
 import { LoginContext } from "../context/loginProvider"
 function ContentBanner({ src, title, description, item }) {
-
     const { userData } = useContext(LoginContext);
-
     const handleOnClick = (item) => {
         window.location.href = `http://localhost:5173/watch/${item.id}/${item.title}/1`
     }

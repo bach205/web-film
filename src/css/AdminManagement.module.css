@@ -78,7 +78,7 @@ tr:hover {
 }
 
 .responseBox {
-    position: absolute;
+    position: fixed;
     top: 3.5em;
     right: 1.2em;
     text-align: center;

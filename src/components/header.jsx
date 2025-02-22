@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router"
-import { LoginContext } from "../context/loginProvider";
-import { getMethod, postMethod } from "../library/API";
+import { useContext, useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router";
 import logoNoBackground from "../assets/bach_logo_nobackground.png";
-import "../css/header.css"
+import { LoginContext } from "../context/loginProvider";
+import "../css/header.css";
+import { postMethod } from "../library/API";
 import Button from "./form/button";
 import Input from "./form/input";
 
@@ -14,6 +14,21 @@ function Header() {
 
     const [isOpenUserList, setIsOpenUserList] = useState(false);
     const [titleSearch, setTitleSearch] = useState("");
+
+    const boxRef = useRef(null);
+    const buttonRef = useRef(null);
+
+    // Hàm kiểm tra nếu click bên ngoài
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (boxRef.current && !boxRef.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(event.target)) {
+                setIsOpenUserList(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     const handleNavigate = (url) => {
         navigate(url);
@@ -30,6 +45,22 @@ function Header() {
             window.location.href = `http://localhost:5173/search?title=${titleSearch}`;
         }
     }
+
+    const UserNavbar = () => {
+        return (
+            <ul className="user-list" ref={boxRef}>
+                <li onClick={() => { handleNavigate("management/user") }}><i className="fa-solid fa-circle-user"></i>Hồ sơ cá nhân</li>
+                {checkUser && <li onClick={() => { handleNavigate("management/admin") }}><i className="fa-solid fa-list-check"></i>Admin management</li>}
+                {checkUser && <li onClick={() => { handleNavigate("management/movie") }}><i className="fa-regular fa-square-plus"></i>Create movie</li>}
+                <div style={{ border: "solid 1px black" }}></div>
+                <li onClick={() => { handleNavigate("watch-later") }}><i className="fa-solid fa-clock"></i>Xem sau (giỏ hàng)</li>
+                <li onClick={() => handleNavigate("/statics")}><i className="fa-solid fa-square-poll-vertical"></i>Thống kê trang web</li>
+                <div style={{ border: "solid 1px black" }}></div>
+                <li onClick={handleLogout}><i className="fa-solid fa-right-from-bracket"></i>Đăng xuất</li>
+            </ul>
+        )
+    }
+
 
     const [toggleNavbar, setToggleNavbar] = useState(false);
 
@@ -65,20 +96,10 @@ function Header() {
                     (<div className="header-right-content">
                         <p id="header-message">{"Hello " + userData?.firstName}</p>
                         <div style={{ display: "flex", flexDirection: "column" }}>
-                            <button className="circle" onClick={() => {
+                            <button ref={buttonRef} className="circle" onClick={() => {
                                 setIsOpenUserList(!isOpenUserList);
                             }}></button>
-                            {isOpenUserList &&
-                                <ul className="user-list">
-                                    <li onClick={() => { handleNavigate("management/user") }}><i className="fa-solid fa-circle-user"></i>Hồ sơ cá nhân</li>
-                                    {checkUser && <li onClick={() => { handleNavigate("management/admin") }}><i className="fa-solid fa-list-check"></i>Admin management</li>}
-                                    {checkUser && <li onClick={() => { handleNavigate("management/movie") }}><i className="fa-regular fa-square-plus"></i>Create movie</li>}
-                                    <div style={{ border: "solid 1px black" }}></div>
-                                    <li onClick={() => { handleNavigate("watch-later") }}><i className="fa-solid fa-clock"></i>Xem sau (giỏ hàng)</li>
-                                    <li onClick={() => handleNavigate("/statics")}><i className="fa-solid fa-square-poll-vertical"></i>Thống kê trang web</li>
-                                    <div style={{ border: "solid 1px black" }}></div>
-                                    <li onClick={handleLogout}><i className="fa-solid fa-right-from-bracket"></i>Đăng xuất</li>
-                                </ul>}
+                            {isOpenUserList && <UserNavbar />}
                         </div>
                     </div>)
                 }

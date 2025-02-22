@@ -7,16 +7,18 @@ import { postMethod } from "../library/API";
 import { useSearchParams } from "react-router";
 
 
-function CreateMovie() {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("")
-    const [imageURL, setImageURL] = useState("")
-    const [genre, setGenre] = useState("");
-    const [country, setCountry] = useState("");
-    const [releaseDate, setReleaseDate] = useState("");
-    const [category, setCategory] = useState("");
-    const [episode, setEpisode] = useState("");
-    const [videoURL, setVideoURL] = useState("");
+function UpdateMovie() {
+    const [searchParams] = useSearchParams();
+
+    const [title, setTitle] = useState(searchParams.get("title"));
+    const [description, setDescription] = useState(searchParams.get("description"))
+    const [imageURL, setImageURL] = useState(searchParams.get("imageURL"))
+    const [genre, setGenre] = useState(searchParams.get("genre"));
+    const [country, setCountry] = useState(searchParams.get("country"));
+    const [releaseDate, setReleaseDate] = useState(searchParams.get("releaseDate"));
+    const [category, setCategory] = useState(searchParams.get("category"));
+    const [episode, setEpisode] = useState(searchParams.get("episode"));
+    const [videoURL, setVideoURL] = useState(searchParams.get("videoURL"));
 
 
     const [listGenre, setListGenre] = useState([]);
@@ -173,4 +175,4 @@ function CreateMovie() {
     )
 }
 
-export default CreateMovie
+export default UpdateMovie

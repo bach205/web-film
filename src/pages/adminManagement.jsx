@@ -53,6 +53,8 @@ const UserTable = () => {
     const [listUserEachPage, setListUserEachPage] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState("");
+
+    //de cap nhat lai list khi update, delete hay create
     const [refresh, setRefresh] = useState(false);
 
     const { userData } = useContext(LoginContext);
@@ -65,6 +67,7 @@ const UserTable = () => {
 
     const [isCreate, setIsCreate] = useState(false)
     const [response, setResponse] = useState("");
+    const [visible, setVisible] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
@@ -82,12 +85,16 @@ const UserTable = () => {
     }, [listUser, page])
 
     useEffect(() => {
-        if (response) {
-            setTimeout(() => {
-                setResponse("");
-            }, [2000])
+        let timeout = setTimeout(() => {
+            setVisible(false);
+        }, [2000])
+        if (visible) {
+            timeout
         }
-    }, [response])
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [visible, response])
 
     const handleCreateUser = async () => {
         let password = prompt("password of new user");
@@ -101,26 +108,28 @@ const UserTable = () => {
                 email,
                 password
             }
-            console.log(data)
             let result = await postMethod(data, "http://localhost:8080/Web-film/user/authorization/registration");
             result = await result.json();
             if (result.status == 200) {
                 setIsCreate(false);
                 setRefresh(!refresh);
                 setResponse(result.message);
+                setVisible(true);
                 setIsSuccess(true)
             } else {
                 setResponse(result.message);
                 setIsSuccess(false);
+                setVisible(true);
             }
         } else {
-            setResponse("mat khau khong duoc rong")
+            setResponse("Password cannot be empty")
             setIsSuccess(false);
+            setVisible(true);
         }
     }
     return (
         <>
-            <p style={{ backgroundColor: isSuccess ? "green" : "red", opacity: response ? 1 : 0 }} className={styles.responseBox}>
+            <p style={{ backgroundColor: isSuccess ? "green" : "red", opacity: visible ? 1 : 0 }} className={styles.responseBox}>
                 {(isSuccess) ? <i className="fa-solid fa-circle-check"></i> : <i className="fa-solid fa-ban"></i>}
                 {response}
             </p>
@@ -137,7 +146,7 @@ const UserTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <RenderUser listUser={listUserEachPage} refresh={refresh} setRefresh={setRefresh} userData={userData} setResponse={setResponse} setIsSuccess={setIsSuccess} />
+                    <RenderUser setVisible={setVisible} listUser={listUserEachPage} refresh={refresh} setRefresh={setRefresh} userData={userData} setResponse={setResponse} setIsSuccess={setIsSuccess} />
                     <tr style={{ height: "2em" }}>
                         <td><InputCRUD value={isCreate == true ? firstName : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setFirstName) }} /></td>
                         <td><InputCRUD value={isCreate == true ? lastName : ""} id={true} actionId={isCreate} onChange={(event) => { handleOnChange(event, setLastName) }} /></td>
@@ -157,7 +166,7 @@ const UserTable = () => {
         </>
     )
 }
-const RenderUser = ({ listUser, refresh, setRefresh, userData, setResponse, setIsSuccess }) => {
+const RenderUser = ({ listUser, refresh, setRefresh, userData, setResponse, setIsSuccess, setVisible }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [gender, setGender] = useState("");
@@ -175,6 +184,7 @@ const RenderUser = ({ listUser, refresh, setRefresh, userData, setResponse, setI
             setResponse(result.message)
             setIsSuccess(false)
         }
+        setVisible(true);
         setRefresh(!refresh);
     }
     const handleToggleInput = (item) => {
@@ -205,6 +215,7 @@ const RenderUser = ({ listUser, refresh, setRefresh, userData, setResponse, setI
         }
         setActionId("");
         setRefresh(!refresh);
+        setVisible(true);
     }
 
     return (

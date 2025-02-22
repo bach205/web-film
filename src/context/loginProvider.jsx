@@ -21,8 +21,6 @@ const LoginProvider = ({ children }) => {
         }
         fetchData();
     }, [])
-    console.log(isLogin);
-    console.log(userData)
     return (
         <LoginContext.Provider value={{ isLogin, setIsLogin, userData, setUserData }}>
             {children}

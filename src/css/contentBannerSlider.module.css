@@ -2,12 +2,12 @@
     position: relative;
     top: -10em;
     overflow: hidden;
-
+    background-color: black;
 }
 
 .containerSlider {
     position: relative;
-    height: 152.45px;
+    height: 156.45px;
 }
 
 .videoContainer {

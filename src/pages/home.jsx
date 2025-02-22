@@ -18,25 +18,22 @@ function Home() {
         const fetchData = async () => {
             let result = await getMethod("http://localhost:8080/Web-film/api/movies/load-homepage")
             result = await result.json();
-            console.log(result.listData)
             setMovie(result.listData)
 
         }
         fetchData()
     }, [])
-
-
     return (
+
         <div >
             <ContentBanner src={'https://trailer.vieon.vn/Teaser_BachNguyetPhanTinh_mkt.mp4'} title={"Bạch Nguyệt Phạn Tinh"} description={(movie.length != 0 && movie[0].length != 0 && movie[0][0].description) || ""}
-                item={movie[0]} />
+                item={movie?.length != 0 && movie[0]?.length != 0 && movie[0][0]} />
             <div className='content-container'>
                 <ContentContainerSlider label={"Thịnh Hành"} array={(Array.isArray(movie[0])) ? movie[0] : []} />
-                <img src={peaky} alt='theme' title='theme' width={"100%"} height={"220px"} style={{ margin: "30px 0" }} />
                 <ContentContainerList label={"Phim Bộ"} array={(Array.isArray(movie[1])) ? movie[1] : []} />
-                <img src={natra} alt='theme' title='theme' width={"100%"} height={"220px"} style={{ margin: "30px 0" }} />
+                <br />
                 <ContentContainerList label={"Phim Lẻ"} array={(Array.isArray(movie[2])) ? movie[2] : []} />
-                <img src={bleach} alt='theme' title='theme' width={"100%"} height={"220px"} style={{ margin: "30px 0" }} />
+                <br />
                 <ContentContainerList label={"Anime"} array={(Array.isArray(movie[3])) ? movie[3] : []} />
             </div>
         </div>

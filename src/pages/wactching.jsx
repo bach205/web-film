@@ -22,7 +22,6 @@ function Watching() {
         let result = await getMethod(`http://localhost:8080/Web-film/api/movies/get-episode-data/${title}/${episode}`);
         result = await result.json();
         if (result.status == 200) {
-            console.log(result)
             setData(result.data);
             setTrendingArray(result.listData[0]);
             setRelativeArray(result.listData[1]);
@@ -50,7 +49,9 @@ function Watching() {
     return (
         <div className='margin-header'>
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <iframe width="1400" height="600" src={data.videoURL} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                <div className='flex-row' style={{ justifyContent: "center" }}>
+                    <iframe width="1400" height="600" src={data.videoURL} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                </div>
                 <h3><span className={styles.secondary}>{"Tên phim: "}</span>{data?.title}</h3>
                 <p style={{ marginTop: "0" }}>
                     <span className={styles.secondary}>View: </span>{data?.view}

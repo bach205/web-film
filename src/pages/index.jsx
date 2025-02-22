@@ -8,4 +8,8 @@ import Search from "./search";
 import WatchLater from "./watchLater";
 import Statics from "./statics";
 import CreateMovie from "./createMovie";
-export default { Home, ForgetPassword, Login, Register, UserManagement, Watching, Search, WatchLater, Statics, CreateMovie }
+import UpdateMovie from "./updateMovie";
+export default {
+    Home, ForgetPassword, Login, Register, UserManagement, Watching, Search, WatchLater, Statics, CreateMovie
+    , UpdateMovie
+}

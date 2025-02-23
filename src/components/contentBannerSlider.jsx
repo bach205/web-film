@@ -16,7 +16,7 @@ function ContentContainerSlider({ label, array, episode = 1 }) {
     return (
         <div className={styles.container}>
             <div>
-                <h2 style={{ color: "aqua", textAlign: "center" }}>{label}</h2>
+                <h2 style={{ color: "aqua", marginTop: "0" }}>{label}</h2>
             </div>
             <div className={styles.containerSlider} style={{ alignItems: "center", width: "100%" }}>
                 <ButtonPrevious page={page} setIsLeftSlide={setIsLeftSlide} setPage={setPage} />

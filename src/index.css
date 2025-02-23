@@ -70,7 +70,7 @@ ul {
 
 .margin-header {
   min-height: 30em;
-  margin: 60px 0;
+  margin: 60px 0 0 0;
   padding: 0 20px;
 }
 
@@ -84,6 +84,14 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.text-hover-aqua {
+  transition: all 0.3s ease;
+}
+
+.text-hover-aqua:hover {
+  color: aqua !important;
 }
 
 @media (prefers-color-scheme: light) {
@@ -103,6 +111,6 @@ ul {
 
 @media screen and (max-width:577px) {
   .margin-header {
-    margin: 7.5em 0;
+    margin: 7.5em 0 0 0;
   }
 }

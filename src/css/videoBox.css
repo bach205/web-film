@@ -7,6 +7,7 @@
 }
 
 .video-box-container-parent {
+    height: 100%;
     position: relative;
     transition: all 1s ease;
     background-color: black;
@@ -25,11 +26,12 @@
 }
 
 .video-box-container-parent:hover .video-box-container-after {
-    display: flex;
+    transition: all 1s ease;
+    opacity: 1;
 }
 
 .video-box-container-after {
-    display: none;
+    display: flex;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -40,7 +42,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-
+    transition: all 1s ease;
+    opacity: 0;
 }
 
 .video-box-container>img {
@@ -53,6 +56,7 @@
     font-size: 11px;
     padding: 0 2px;
     color: whitesmoke;
+    transition: all 1s ease;
 }
 
 .video-box-watch-later-button {
@@ -106,4 +110,12 @@
 
 .video-box-btn-update {
     left: 0;
+}
+
+.videobox-update td {
+    padding: 0;
+}
+
+.videobox-update table {
+    table-layout: fixed;
 }

@@ -1,3 +1,17 @@
 .content-container {
-    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
+}
+
+.content-container-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 4em;
+}
+
+.content-main {
+    flex-grow: 2;
 }

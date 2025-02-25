@@ -13,6 +13,7 @@ import Watching from "../pages/wactching"
 import WatchLater from "../pages/watchLater"
 import { PrivateAdminRoute } from "./privateAdminRoute"
 import { PrivateRoute } from "./privateRoute"
+import System from "../pages/system"
 
 function AppRouter() {
 
@@ -21,16 +22,15 @@ function AppRouter() {
             {/*container chua footer va header */}
             <Route path="/" element={<Container />} >
                 <Route index element={<Home />} />
-                <Route path="management">
-                    <Route path="user" element={<PrivateRoute element={<UserManagement />} />} />
-                    <Route path="admin" element={<PrivateAdminRoute element={<AdminManagement />} />} />
+                <Route path="management" element={<System />}>
+                    <Route path="user" element={<PrivateAdminRoute element={<AdminManagement />} />} />
                     <Route path="movie" element={<PrivateAdminRoute element={<CreateMovie />} />} />
+                    <Route path="statics" element={<PrivateAdminRoute element={<Statics />} />} />
                 </Route>
+                <Route path="user" element={<PrivateRoute element={<UserManagement />} />} />
                 <Route path="watch/:movieId/:title/:episode" element={<Watching />} />
                 <Route path="search" element={<Search />} />
                 <Route path="watch-later" element={<PrivateRoute element={<WatchLater />} />} />
-                <Route path="statics" element={<Statics />} />
-
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

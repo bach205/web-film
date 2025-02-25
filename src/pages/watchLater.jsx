@@ -41,7 +41,7 @@ function WatchLater() {
                     <table>
                         <thead>
                             <tr>
-                                <th style={{ width: "4em" }}>Title</th>
+                                <th style={{ width: "10em" }}>Title</th>
                                 <th style={{ width: "15em" }}>Image</th>
                                 <th style={{ width: "40em" }}>Descrition</th>
                                 <th style={{ width: "4em" }}>Detail</th>
@@ -51,8 +51,9 @@ function WatchLater() {
                         </thead>
                         <tbody>
                             {listMovieEachPage.map((item) => {
+                                console.log(item)
                                 return (
-                                    <WatchLaterList movie={item} key={item.movieId} refresh={refresh} setRefresh={setRefresh} userData={userData} />
+                                    <WatchLaterList item={item} key={item.movieId} refresh={refresh} setRefresh={setRefresh} userData={userData} />
                                 )
                             })}
                         </tbody>
@@ -65,11 +66,11 @@ function WatchLater() {
     )
 }
 
-const WatchLaterList = ({ movie, refresh, setRefresh, userData }) => {
+const WatchLaterList = ({ item, refresh, setRefresh, userData }) => {
     const handleOnClickDelete = (item, userData) => {
         let data = {
             userId: userData?.id,
-            movieId: item?.movieId
+            movieId: item?.id
         }
         const postData = async () => {
             let result = await postMethod(data, "http://localhost:8080/Web-film/api/movies/authorization/delete-watchlater");
@@ -85,17 +86,17 @@ const WatchLaterList = ({ movie, refresh, setRefresh, userData }) => {
     }
     return (
         <tr style={{ height: "2em" }}>
-            <td>{movie.title}</td>
-            <td><img src={movie.imageURL} height={"100%"} width={"100%"} onClick={() => handleOnClick(movie)} style={{ cursor: "pointer" }} /></td>
-            <td>{movie.description}</td>
+            <td>{item.title}</td>
+            <td><img src={item.imageURL} height={"100%"} width={"100%"} onClick={() => handleOnClick(item)} style={{ cursor: "pointer" }} /></td>
+            <td>{item.description}</td>
             <td>
-                <div>{movie.category}</div>
-                <div>{movie.country}</div>
-                <div>{movie.releaseDate}</div>
+                <div>{item.category}</div>
+                <div>{item.country}</div>
+                <div>{item.releaseDate}</div>
             </td>
-            <td>{movie.view}</td>
+            <td>{item.view}</td>
             <td className={styles.action} >
-                <div style={{ color: "white", cursor: "pointer", backgroundColor: "red" }} onClick={() => handleOnClickDelete(movie, userData)}>delete</div>
+                <div style={{ color: "white", cursor: "pointer", backgroundColor: "red" }} onClick={() => handleOnClickDelete(item, userData)}>delete</div>
             </td>
         </tr>
     )

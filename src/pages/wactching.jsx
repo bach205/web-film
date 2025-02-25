@@ -46,6 +46,7 @@ function Watching() {
             updateView();
         }
     }, [isFetch])
+    console.log(data)
     return (
         <div className='margin-header'>
             <div style={{ display: "flex", flexDirection: "column" }}>

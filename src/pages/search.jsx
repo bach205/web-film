@@ -22,11 +22,9 @@ function Search() {
     const [releaseDate, setReleaseDate] = useState(searchParams.get("releaseDate") || 0);
     const [category, setCategory] = useState(searchParams.get("category") || "");
 
-    const [arrange, setArrange] = useState(searchParams.get("arrange") || "");
-    const [page, setPage] = useState(1);
-    const [totalPage, setTotalPage] = useState("");
-    const [listMovie, setListMovie] = useState([]);
-    const [listMovieEachPage, setListMovieEachPage] = useState([]);
+    const [direction, setDirection] = useState(searchParams.get("direction") || "");
+    const [sort, setSort] = useState(searchParams.get("sort") || "");
+
 
     const genreArray = [
         { name: "Thể Loại", value: "" },
@@ -95,12 +93,12 @@ function Search() {
     ]
 
     const fetchData = async () => {
-        let result = await getMethod(`http://localhost:8080/Web-film/api/movies/search?title=${title}&genre=${genre}&country=${country}&releaseDate=${releaseDate}&category=${category}`);
+        let result = await getMethod(`http://localhost:8080/Web-film/api/movies/search?title=${title}&genre=${genre}&country=${country}&releaseDate=${releaseDate}&category=${category}&sort=${sort}&direction=${direction}`);
         return result = await result.json();
     }
     const searchMovie = async () => {
         let result = await fetchData();
-        insertionSort(result.data, arrange)
+        insertionSort(result.data, sort)
         setListMovie(result.data);
     }
 
@@ -132,12 +130,18 @@ function Search() {
     useEffect(() => {
         searchMovie();
     }, [])
+    //------------------pagination---------------------------------------//
+    const [page, setPage] = useState(1);
+    const [totalPage, setTotalPage] = useState("");
+    const [listMovie, setListMovie] = useState([]);
+    const [listMovieEachPage, setListMovieEachPage] = useState([]);
     const TOTAL_VIDEO_PER_PAGE = 30;
     const TOTAL_COLUMN = 5
     useEffect(() => {
         setListMovieEachPage(listMovie.slice(TOTAL_VIDEO_PER_PAGE * (page - 1), (TOTAL_VIDEO_PER_PAGE * page)));
         setTotalPage(Math.ceil(listMovie.length / TOTAL_VIDEO_PER_PAGE))
     }, [listMovie, page])
+    //--------------------------------------------------------------//
 
     return (
         <div className='margin-header'>
@@ -148,7 +152,7 @@ function Search() {
                     <div className='flex-row' style={{ position: "relative" }}>
                         <Input type={"text"} placeholder={"Tìm kiếm"} value={title} className="medium-input" onChange={(event) => handleOnChange(event, setTitle)} onKeyDown={e => HandleOnEnterDown(e)} />
                     </div>
-                    <DropDown value={arrange} style={{ width: "12em" }} array={arrangeArray} onChange={(event) => handleOnChange(event, setArrange)} />
+                    <DropDown value={sort} style={{ width: "12em" }} array={arrangeArray} onChange={(event) => handleOnChange(event, setSort)} />
                 </div>
                 <div className={styles.dropDownRight}>
                     <div className={styles.dropDownChild}>

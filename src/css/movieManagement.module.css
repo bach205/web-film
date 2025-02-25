@@ -1,3 +1,45 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.container_modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.659);
+}
+
+.modal {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    height: auto;
+    padding: 5em 2em;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0);
+    border-radius: 10px;
+}
+
+.description {
+    border-radius: 10px;
+}
+
+.close_button {
+    position: absolute;
+    background-color: red;
+    top: 0;
+    right: 0;
+}
+
 .action {
     display: flex;
     flex-direction: row;

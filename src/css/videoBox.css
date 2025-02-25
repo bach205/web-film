@@ -71,28 +71,8 @@
 }
 
 .video-box-watch-later-button :hover {
-    color: rgb(167, 158, 6);
+    color: red;
 
-}
-
-.videobox-hightlight {
-    border-radius: 5px;
-    padding: 1px 2px;
-}
-
-.videobox-category {
-    border: solid 1px teal;
-    background-color: teal;
-}
-
-.videobox-country {
-    border: solid 1px purple;
-    background-color: purple;
-}
-
-.videobox-releaseDate {
-    border: solid 1px brown;
-    background-color: brown;
 }
 
 .video-box-btn {

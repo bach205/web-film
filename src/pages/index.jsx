@@ -9,7 +9,8 @@ import WatchLater from "./watchLater";
 import Statics from "./statics";
 import CreateMovie from "./createMovie";
 import UpdateMovie from "./updateMovie";
+import System from "./system";
 export default {
     Home, ForgetPassword, Login, Register, UserManagement, Watching, Search, WatchLater, Statics, CreateMovie
-    , UpdateMovie
+    , UpdateMovie, System
 }

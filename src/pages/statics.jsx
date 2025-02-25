@@ -12,7 +12,7 @@ function Statics() {
     const [totalMovie, setTotalMovie] = useState("")
 
     const fetchData = async () => {
-        let result = await getMethod("http://localhost:8080/Web-film/api/movies/load-statics");
+        let result = await getMethod("http://localhost:8080/Web-film/api/movies/load-most-view-by-duration?duration=month");
         result = await result.json()
         setMostView(result.listData[0].slice(0, 5) || 0)
         setLeastView(result.listData[0].slice(5, 10) || 0)

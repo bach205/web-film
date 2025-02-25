@@ -39,8 +39,7 @@ const arrayRole = [
 ]
 export const AdminManagement = () => {
     return (
-        <div className="margin-header">
-            <h2>User management</h2>
+        <div>
             <UserTable />
             <div style={{ height: "10em" }}></div>
         </div>
@@ -136,12 +135,12 @@ const UserTable = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
+                        <th style={{ width: "10em" }}>Firstname</th>
+                        <th style={{ width: "10em" }}>Lastname</th>
                         <th>Email</th>
-                        <th >Gender</th>
-                        <th>Address</th>
-                        <th >Role</th>
+                        <th style={{ width: "6em" }} >Gender</th>
+                        <th >Address</th>
+                        <th style={{ width: "6em" }} >Role</th>
                         <th className={styles.actionContainer} >Action</th>
                     </tr>
                 </thead>

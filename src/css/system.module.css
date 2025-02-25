@@ -1,0 +1,86 @@
+.navbar {
+    margin-top: 5em;
+    width: 11em;
+    background-color: #242424;
+}
+
+nav {
+    background-color: black;
+}
+
+.main {
+
+    height: 4.5em;
+    flex: 0;
+    background-color: black;
+    cursor: pointer;
+}
+
+.main:hover {
+    background-color: #242424;
+    border-top-right-radius: 3em;
+    border-bottom-right-radius: 3em;
+}
+
+.main:hover+.main {
+    border-top: solid 1px aqua;
+    border-top-right-radius: 3em;
+}
+
+.main:has(+ .main:hover) {
+    border-bottom-right-radius: 3em;
+    border-bottom: solid 1px aqua;
+}
+
+.last:hover,
+.first:hover {
+    background-color: black !important;
+    border-radius: 0;
+    cursor: default;
+}
+
+.main:has(+ .last:hover) {
+    border-bottom: none;
+    border-radius: 0;
+}
+
+.first:hover+.main {
+    border-top: none;
+    border-radius: 0;
+}
+
+.main:has(+ .main:focus) {
+    border-bottom: solid 1px aqua;
+    border-bottom-right-radius: 3em;
+}
+
+.main:focus+.main {
+    border-top: solid 1px aqua;
+    border-top-right-radius: 3em;
+}
+
+.main:focus {
+    outline: none;
+    background-color: #242424;
+    border-top-right-radius: 3em;
+    border-bottom-right-radius: 3em;
+
+}
+
+.main:focus div {
+    color: #268283;
+}
+
+.main>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    height: 100%;
+    width: 100%;
+}
+
+.main>div:hover {
+    color: #268283;
+}

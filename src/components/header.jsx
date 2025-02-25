@@ -31,7 +31,8 @@ function Header() {
     }, []);
 
     const handleNavigate = (url) => {
-        navigate(url);
+        // navigate(url);
+        window.location.href = "http://localhost:5173/" + url;
     }
 
     const handleLogout = async () => {
@@ -49,12 +50,10 @@ function Header() {
     const UserNavbar = () => {
         return (
             <ul className="user-list" ref={boxRef}>
-                <li onClick={() => { handleNavigate("management/user") }}><i className="fa-solid fa-circle-user"></i>Hồ sơ cá nhân</li>
-                {checkUser && <li onClick={() => { handleNavigate("management/admin") }}><i className="fa-solid fa-list-check"></i>Admin management</li>}
-                {checkUser && <li onClick={() => { handleNavigate("management/movie") }}><i className="fa-regular fa-square-plus"></i>Create movie</li>}
-                <div style={{ border: "solid 1px black" }}></div>
+                <li onClick={() => { handleNavigate("user") }}><i className="fa-solid fa-circle-user"></i>Hồ sơ cá nhân</li>
                 <li onClick={() => { handleNavigate("watch-later") }}><i className="fa-solid fa-clock"></i>Xem sau (giỏ hàng)</li>
-                <li onClick={() => handleNavigate("/statics")}><i className="fa-solid fa-square-poll-vertical"></i>Thống kê trang web</li>
+                <div style={{ border: "solid 1px black" }}></div>
+                {checkUser && <li onClick={() => { handleNavigate("management/user") }}><i className="fa-solid fa-database"></i>Quản lí</li>}
                 <div style={{ border: "solid 1px black" }}></div>
                 <li onClick={handleLogout}><i className="fa-solid fa-right-from-bracket"></i>Đăng xuất</li>
             </ul>

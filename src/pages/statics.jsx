@@ -2,60 +2,82 @@ import { useEffect, useState } from "react";
 import { getMethod } from "../library/API"
 import VideoBox from "../components/videoBox";
 import styles from "../css/statics.module.css"
+import React from "react";
+import { Line } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+import { color } from "chart.js/helpers";
+
+// Đăng ký các thành phần của Chart.js
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 
 function Statics() {
-
-    const [mostView, setMostView] = useState([])
-    const [leastView, setLeastView] = useState([])
-    const [totalView, setTotalView] = useState("");
-    const [totalMovie, setTotalMovie] = useState("")
-
-    const fetchData = async () => {
-        let result = await getMethod("http://localhost:8080/Web-film/api/movies/load-most-view-by-duration?duration=month");
-        result = await result.json()
-        setMostView(result.listData[0].slice(0, 5) || 0)
-        setLeastView(result.listData[0].slice(5, 10) || 0)
-        setTotalMovie(result.listData[1][0])
-        setTotalView(result.listData[1][1])
-    }
-
+    const [dat, setDat] = useState([[0], [0], [0], [0]])
     useEffect(() => {
+        const fetchData = async () => {
+            let result = await getMethod("http://localhost:8080/Web-film/api/movies/authorization/statics")
+            result = await result.json();
+            setDat(result.data);
+        }
         fetchData();
     }, [])
-    return (
-        <div className='margin-header'>
-            <div className={styles.wrapper}>
-                <div className={styles.container}>
-                    <TopStatic movie={mostView} label={"The Most View"} />
-                    <div>
-                        <h2><span style={{ color: "aqua" }}>Total Movie: </span>{totalMovie}<span style={{ color: "gray" }}> Movies</span></h2>
-                        <h2><span style={{ color: "aqua" }}>Total View: </span>{totalView}<span style={{ color: "gray" }}> Views</span></h2>
-                    </div>
-                    <TopStatic movie={leastView} label={"The Least View"} />
-                </div>
-            </div>
-        </div>
-    )
-}
+    const data = {
+        labels: ["0:00", "1:00", "2:00", "3:00", "4:00", "5:00", "6:00", "7:00", "8:00", "9:00",
+            "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00",
+            "19:00", "20:00", "21:00", "22:00", "23:00"],
+        datasets: [
+            {
+                label: "Phim Bộ",
+                data: dat[0],
+                borderColor: "red",
+                backgroundColor: "rgba(124, 0, 12, 0.2)",
+                tension: 0.4, // Làm mượt đường
+            },
+            {
+                label: "Phim Lẻ",
+                data: dat[1],
+                borderColor: "blue",
+                backgroundColor: "rgba(0, 0, 255, 0.2)",
+                tension: 0.4, // Làm mượt đường
+            },
+            {
+                label: "Tổng",
+                data: dat[2],
+                borderColor: "green",
+                backgroundColor: "rgba(0, 167, 50, 0.2)",
+                tension: 0.4, // Làm mượt đường
+            },
+        ],
+    };
 
-const TopStatic = ({ movie, label }) => {
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: "top"
+            },
+            title: {
+                display: true,
+                text: "Biểu đồ thống kê lượt xem",
+                font: {
+
+                    size: 20, // Cỡ chữ của tiêu đề
+                    weight: "bold"
+                },
+                color: "white"
+            },
+        },
+    };
+
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-            <h3 className={styles.label}>{label}</h3>
-            {movie && movie.map((movie) => {
-                return (
-                    <div key={movie.movieId} style={{ display: "inline-flex", flexDirection: "row", gap: "10px", border: "solid 2px gray", width: "29em" }}>
-                        <img src={movie.imageURL} width={"200em"} height={"auto"} />
-                        <div style={{ padding: "0 10px" }}>
-                            <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>Title: </span>{movie.title}</p>
-                            <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>View: </span>{movie.view}</p>
-                            <p style={{ margin: "2px 0" }}><span style={{ color: "gray" }}>View per episode: </span>{movie.totalEpisode}</p>
-                        </div>
-                    </div>
-                )
-            })}
+        <div style={{ width: "100%" }}>
+            <div className="flex-row" style={{ justifyContent: "center", backgroundColor: "aqua" }}>
+                <p style={{ color: "red" }}>{"Phim Bộ: " + dat[3][0]}</p>
+                <p style={{ color: "blue" }}>{"Phim Lẻ: " + dat[3][1]}</p>
+                <p style={{ color: "green" }}>{"Tổng: " + (dat[3][0] + dat[3][1])}</p>
+            </div>
+            <Line data={data} options={options} />
         </div>
-    )
+    );
 }
 export default Statics

@@ -1,33 +1,35 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../components/form/button";
 import { DropDown } from "../components/form/dropdown";
 import Input from "../components/form/input";
-import WrapperBox from "../components/wrapperBox";
-import { postMethod, getMethod } from "../library/API";
-import { useSearchParams } from "react-router";
-import { truncateString } from "../library/truncateString.js"
-import styles from "../css/movieManagement.module.css";
 import { Pagination } from "../components/pagination.jsx";
+import styles from "../css/movieManagement.module.css";
+import { getMethod, postMethod } from "../library/API";
+import { truncateString } from "../library/truncateString.js";
+import { ReLoadApiContext } from "../context/reloadApiProvider.jsx";
 
 
 function CreateMovie() {
 
+    const [response, setResponse] = useState("");
+    const { refresh } = useContext(ReLoadApiContext)
     const [page, setPage] = useState(1);
     const [listMovie, setListMovie] = useState([]);
     const [listMovieEachPage, setListMovieEachPage] = useState([]);
     const TOTAL_VIDEO_PER_PAGE = 12;
     const TOTAL_COLUMN = 5
 
+
     const [createModal, setCreateModal] = useState(false);
+
     useEffect(() => {
         const fetchData = async () => {
             let result = await getMethod(`http://localhost:8080/Web-film/api/movies/authorization/get-all-movies`)
             result = await result.json();
-            // setResponse(result.message)
             setListMovie(result.data)
         }
         fetchData();
-    }, [])
+    }, [refresh])
     useEffect(() => {
         setListMovieEachPage(listMovie.slice(TOTAL_VIDEO_PER_PAGE * (page - 1), (TOTAL_VIDEO_PER_PAGE * page)))
     }, [page, listMovie])
@@ -36,6 +38,7 @@ function CreateMovie() {
     }
     return (
         <div className={styles.container}>
+            {response && <div className={styles.response}>{response?.message}</div>}
             <div>
                 <button onClick={openCreateModal} style={{ backgroundColor: "aqua", marginTop: "5px" }}>
                     <i style={{ color: "black", fontSize: "25px" }} className="fa-solid fa-square-plus"></i>
@@ -53,18 +56,31 @@ function CreateMovie() {
                     </tr>
                 </thead>
                 <tbody>
-                    <RenderListMovie array={listMovieEachPage} />
+                    <RenderListMovie array={listMovieEachPage} response={response} setResponse={setResponse} />
                 </tbody>
             </table>
             <Pagination page={page} setPage={setPage} totalColumn={TOTAL_COLUMN} totalPage={Math.ceil(listMovie.length / TOTAL_VIDEO_PER_PAGE)} />
-            {createModal && <CreateModal setCreateModal={setCreateModal} />}
+            {createModal && <CreateModal setCreateModal={setCreateModal} response={response} setResponse={setResponse} />}
+
+
         </div>
     )
 }
 
-const RenderListMovie = ({ array }) => {
+const RenderListMovie = ({ array, response, setResponse }) => {
+    const { setRefresh } = useContext(ReLoadApiContext)
+    const [updateModal, setUpdateModal] = useState(false);
+    const handleDelete = async (id) => {
+        let result = await postMethod(id, "http://localhost:8080/Web-film/api/movies/authorization/remove-movie")
+        result = result.json();
+        setRefresh(refresh => !refresh)
+        setResponse(result);
+
+    }
+    const [id, setId] = useState("");
     return (
         array.map((item) => {
+            console.log(id)
             return (
                 <tr key={item?.id}>
                     <td>{item?.title}</td>
@@ -81,16 +97,17 @@ const RenderListMovie = ({ array }) => {
                         )}
                     </td>
                     <td className={styles.action}>
-                        <div className={[styles.icon, styles.add_episode].join(" ")}><i className="fa-solid fa-upload"></i></div>
+                        <div onClick={() => { setId(item?.id); setUpdateModal(true) }} className={[styles.icon, styles.add_episode].join(" ")}><i className="fa-solid fa-upload"></i></div>
                         <div className={[styles.icon, styles.update].join(" ")}><i className="fa-solid fa-pen"></i></div>
-                        <div className={[styles.icon, styles.delete].join(" ")}><i className="fa-solid fa-trash"></i></div>
+                        <div onClick={() => { handleDelete(item?.id) }} className={[styles.icon, styles.delete].join(" ")}><i className="fa-solid fa-trash"></i></div>
                     </td>
+                    {updateModal && <UpdateModal setUpdateModal={setUpdateModal} response={response} setResponse={setResponse} id={id} />}
                 </tr>
             )
         })
     )
 }
-const CreateModal = ({ setCreateModal }) => {
+const CreateModal = ({ setCreateModal, response, setResponse }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("")
     const [imageURL, setImageURL] = useState("")
@@ -98,14 +115,12 @@ const CreateModal = ({ setCreateModal }) => {
     const [country, setCountry] = useState("");
     const [releaseDate, setReleaseDate] = useState("");
     const [category, setCategory] = useState("");
-    const [episode, setEpisode] = useState("");
-    const [videoURL, setVideoURL] = useState("");
-
+    const { setRefresh } = useContext(ReLoadApiContext)
 
     const [listGenre, setListGenre] = useState([]);
     const [genreRemove, setGenreRemove] = useState("");
-    const [response, setResponse] = useState("");
 
+    console.log(response?.message)
     const genreArray = [
         { name: "Thể Loại", value: "" },
         { name: "Âm Nhạc", value: "Âm Nhạc" },
@@ -191,21 +206,20 @@ const CreateModal = ({ setCreateModal }) => {
             parseInt(releaseDate),
             country,
             imageURL,
-            parseInt(episode),
-            videoURL,
             listGenre
         ]
         const postData = async () => {
             let result = await postMethod(data, `http://localhost:8080/Web-film/api/movies/authorization/add-movie`)
             result = await result.json();
-            setResponse(result.message)
+            setRefresh(refresh => !refresh)
+            setResponse(result)
         }
         postData();
     }
     return (
         <div className={styles.container_modal}>
             <div className={styles.modal}>
-                <button className={styles.close_button} onClick={() => { setCreateModal(false) }}>
+                <button className={styles.close_button} onClick={() => { setCreateModal(false); setResponse("") }}>
                     <i className="fa-solid fa-xmark"></i>
                 </button>
                 <div className="flex-row">
@@ -233,9 +247,58 @@ const CreateModal = ({ setCreateModal }) => {
                 </div>
 
                 {response && (
-                    <p style={{ color: response == "ok" ? "green" : "red", alignSelf: "center" }}>{response}</p>
+                    <div className={styles.response} style={{ color: response.status == 200 ? "green" : "red", alignSelf: "center" }}>{response.message}</div>
                 )}
                 <Button onClick={handleOnClick} style={{ alignSelf: "center" }}>+ create +</Button>
+            </div>
+        </div>
+    )
+}
+const UpdateModal = ({ setUpdateModal, response, setResponse, id }) => {
+    const [videoURL, setVideoURL] = useState("");
+    const [episode, setEpisode] = useState("");
+    const { setRefresh } = useContext(ReLoadApiContext)
+
+
+
+    const handleOnChange = (event, setState) => {
+        setState(event.target.value);
+    }
+
+
+    const handleOnClick = () => {
+        const data = {
+            movieId: id,
+            episode,
+            videoURL
+        }
+        const postData = async () => {
+            let result = await postMethod(data, `http://localhost:8080/Web-film/api/movies/authorization/add-episode`)
+            result = await result.json();
+            setRefresh(refresh => !refresh)
+            setResponse(result)
+
+        }
+        postData();
+    }
+
+    return (
+        <div className={styles.container_modal}>
+            <div className={styles.modal}>
+                <button className={styles.close_button} onClick={() => { setUpdateModal(false); setResponse("") }}>
+                    <i className="fa-solid fa-xmark"></i>
+                </button>
+                <h1 style={{ color: "white" }} >Add episode</h1>
+                <div className="flex-row">
+                    <Input value={episode} label={"Episode"} placeholder={"Episode"} className={"default-input"} type={"text"} onChange={(event) => handleOnChange(event, setEpisode)} />
+                    <Input value={videoURL} label={"videoURL"} placeholder={"http://videoURL.com"} className={"default-input"} type={"text"} onChange={(event) => handleOnChange(event, setVideoURL)} />
+                </div>
+
+
+                {response && (
+                    <div className={styles.response} style={{ color: response.status == 200 ? "green" : "red", alignSelf: "center" }}>{response.message}</div>
+                )}
+                <Button onClick={() => handleOnClick()} style={{ alignSelf: "center" }}>+ create +</Button>
             </div>
         </div>
     )

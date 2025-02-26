@@ -33,6 +33,14 @@
     border-radius: 10px;
 }
 
+.response {
+    top: 1em;
+    right: 5em;
+    position: absolute;
+    width: 20em;
+    height: 1em;
+}
+
 .close_button {
     position: absolute;
     background-color: red;

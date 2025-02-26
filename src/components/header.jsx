@@ -68,13 +68,13 @@ function Header() {
         <div className="header-container">
             <img id="header-toggle-logo" onClick={() => { setToggleNavbar(!toggleNavbar) }} src={logoNoBackground} alt="" width="80px" height="100%" />
             <ul className="header-navbar" style={{ display: toggleNavbar ? "flex" : "none" }} id="header-ul">
-                <li onClick={() => { handleNavigate("/") }}><i className="fa-solid fa-house"></i>Trang chủ</li>
+                <li onClick={() => { handleNavigate("") }}><i className="fa-solid fa-house"></i>Trang chủ</li>
                 <li onClick={() => { window.location.href = `http://localhost:5173/search?category=Phim%20Bộ` }}><i className="fa-solid fa-video"></i>Phim bộ</li>
                 <li onClick={() => { window.location.href = `http://localhost:5173/search?category=Phim%20Lẻ` }}><i className="fa-solid fa-film"></i>Phim lẻ</li>
                 <li onClick={() => { window.location.href = `http://localhost:5173/search?genre=Anime` }}><i className="fa-solid fa-dragon"></i>Anime</li>
             </ul>
             <ul className="header-navbar" id="header-ul">
-                <li onClick={() => { handleNavigate("/") }}><i className="fa-solid fa-house"></i>Trang chủ</li>
+                <li onClick={() => { handleNavigate("") }}><i className="fa-solid fa-house"></i>Trang chủ</li>
                 <li onClick={() => { window.location.href = `http://localhost:5173/search?category=Phim%20Bộ` }}><i className="fa-solid fa-video"></i>Phim bộ</li>
                 <li onClick={() => { window.location.href = `http://localhost:5173/search?category=Phim%20Lẻ` }}><i className="fa-solid fa-film"></i>Phim lẻ</li>
                 <li onClick={() => { window.location.href = `http://localhost:5173/search?genre=Anime` }}><i className="fa-solid fa-dragon"></i>Anime</li>

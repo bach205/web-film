@@ -50,11 +50,11 @@ const Information = ({ userData, setUserData, response, setResponse, isSuccess, 
     const [lastName, setLastName] = useState(userData?.lastName);
     const [gender, setGender] = useState(userData?.gender);
     const [address, setAddress] = useState(userData?.address);
-
     const handleOnSubmit = () => {
         const data = {
             id: userData.id,
             firstName,
+            email: userData.email,
             lastName,
             gender,
             address

@@ -88,8 +88,8 @@ function Header() {
                 {!isLogin
                     ?
                     (<div className="header-right-content">
-                        <Button type="small-button" onClick={() => handleNavigate("/login")}>Login</Button>
-                        <Button type="small-button" onClick={() => handleNavigate("/register")}>Register</Button>
+                        <Button type="small-button" onClick={() => handleNavigate("login")}>Login</Button>
+                        <Button type="small-button" onClick={() => handleNavigate("register")}>Register</Button>
                     </div>)
                     :
                     (<div className="header-right-content">

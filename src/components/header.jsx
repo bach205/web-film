@@ -46,6 +46,9 @@ function Header() {
             window.location.href = `http://localhost:5173/search?title=${titleSearch}`;
         }
     }
+    const handleOnSearch = () => {
+        window.location.href = `http://localhost:5173/search?title=${titleSearch}`;
+    }
 
     const UserNavbar = () => {
         return (
@@ -82,6 +85,7 @@ function Header() {
 
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                 <Input type={"text"} placeholder={"Tìm kiếm"} className="medium-input" onKeyDown={onEnterDown} value={titleSearch} onChange={(event) => { setTitleSearch(event.target.value) }} />
+                <div style={{ position: "absolute", padding: "0 0.5em" }} onClick={handleOnSearch}><i className="fa-solid fa-magnifying-glass"></i></div>
             </div>
 
             <div>
